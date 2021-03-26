@@ -1,0 +1,84 @@
+<ion-header color="primary">
+  <ion-buttons color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="login"></ion-back-button>
+    </ion-buttons>
+  </ion-buttons>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-padding ion-margin" [formGroup]="registerForm">
+    <ion-row size="12" size-md="4" offset-md="4">
+      <ion-col size="12" size-md="4" offset-md="4">
+        <p class="title ion-text-center ion-padding-vertical">CoachApp</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" size-md="4" offset-md="4">
+
+        <ion-label position="stacked" color="light" class="ion-padding-bottom" >Firstname</ion-label>
+        <ion-input color="dark" formControlName="firstname"></ion-input>
+        <!-- <ion-text color="danger" *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('required')">Kötelező mező!</ion-text>
+        <ion-text color="danger" *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('email')">Kötelező formátum: tesuser@test.com</ion-text>
+ -->
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" size-md="4" offset-md="4">
+
+        <ion-label position="stacked" color="light" class="ion-padding-bottom">Lastname</ion-label>
+        <ion-input color="dark" formControlName="lastname"></ion-input>
+        <!-- <ion-text color="danger" *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('required')">Kötelező mező!</ion-text>
+        <ion-text color="danger" *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('email')">Kötelező formátum: tesuser@test.com</ion-text>
+ -->
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" size-md="4" offset-md="4">
+
+        <ion-label position="stacked" color="light" class="ion-padding-bottom">Email</ion-label>
+        <ion-input color="dark" formControlName="email"></ion-input>
+        <!-- <ion-text color="danger" *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('required')">Kötelező mező!</ion-text>
+        <ion-text color="danger" *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('email')">Kötelező formátum: tesuser@test.com</ion-text>
+ -->
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col size="12" size-md="4" offset-md="4">
+
+        <ion-label position="stacked" color="light" class="ion-padding-bottom">Password</ion-label>
+        <ion-input color="dark" type="password" formControlName="password"></ion-input>
+        <!-- <ion-text color="danger" *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('required')">Kötelező mező!</ion-text>
+        <ion-text color="danger" *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('email')">Kötelező formátum: tesuser@test.com</ion-text>
+ -->
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" size-md="4" offset-md="4">
+
+        <ion-label position="stacked" color="light" class="ion-padding-bottom" >Password again</ion-label>
+        <ion-input color="dark" type="password" formControlName="passwordAgain"></ion-input>
+        <!-- <ion-text color="danger" *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('required')">Kötelező mező!</ion-text>
+        <ion-text color="danger" *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('email')">Kötelező formátum: tesuser@test.com</ion-text>
+ -->
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" size-md="4" offset-md="4">
+       <ion-text color="danger" *ngIf="errorMessage">The passwords don't match!</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding-vertical ion-margin-vertical">
+      <ion-col size="12" size-md="4" offset-md="4">
+        <ion-button expand="block" color="tertiary" class="login__button" (click)="onRegister()" [disabled]="registerForm.invalid">Register</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

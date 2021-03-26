@@ -13,8 +13,8 @@ export class AuthService {
 
   constructor(private auth: AngularFireAuth, private router: Router, private toast: ToastService) { }
 
-  async standardLogin(email, password){
-    await this.auth
+  standardLogin(email, password){
+    this.auth
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         this.toast.presentToast('Successfull Login!', 'success');
@@ -24,6 +24,19 @@ export class AuthService {
         this.toast.presentToast(error.message, 'danger');
       })
   }
+
+  register(email, password){
+    this.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        this.toast.presentToast('Successfull Register!', 'success');
+        this.router.navigateByUrl('home')
+      })
+      .catch((error) => {
+        this.toast.presentToast(error.message, 'danger');
+      })
+  }
+
 
 
 }

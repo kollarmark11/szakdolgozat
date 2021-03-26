@@ -1,0 +1,33 @@
+@import '../../../theme/variables.scss';
+
+ion-header{
+  background-color: $background-color;
+}
+
+ion-content{
+  --background: #22333B;
+}
+
+.title{
+  font-size: 35px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  color: $light;
+  font-family: $secondary-font;
+  text-transform: uppercase;
+}
+
+ion-label{
+  font-family: $primary-font;
+  --padding-bottom:10px;
+}
+
+ion-input{
+  border: 1px solid $light;
+  border-radius: 10px;
+  background-color: $light;
+  --padding-start:5px;
+  --padding-end:5px;
+  font-family: $primary-font;
+  font-size:14px;
+}
