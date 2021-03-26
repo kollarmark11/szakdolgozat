@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FirestoreService } from '../shared/firestore/firestore.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  allTeam: any;
+
+  constructor(private fireservice: FirestoreService) {
+    fireservice.getEveryData();
+    this.allTeam = fireservice.teams
+    console.log(this.allTeam)
+  }
 
 }

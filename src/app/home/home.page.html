@@ -13,8 +13,9 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <div *ngFor="let item of allTeam">
+    <ion-text>{{ item.id }}</ion-text>
+    <ion-text>{{ item.data.name }}</ion-text>
+    <ion-text>{{ item.data.number }}</ion-text>
+    </div>
 </ion-content>

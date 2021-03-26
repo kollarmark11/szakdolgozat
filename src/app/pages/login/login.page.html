@@ -1,0 +1,60 @@
+<ion-content class="login" >
+  <ion-grid class="ion-padding ion-margin" [formGroup]="loginForm" >
+    <ion-row size="12" size-md="4" offset-md="4">
+      <ion-col size="12" size-md="4" offset-md="4">
+        <p class="login__title ion-text-center ion-padding-vertical">CoachApp</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" size-md="4" offset-md="4">
+
+        <ion-label position="stacked" color="light" class="ion-padding-bottom" >Email</ion-label>
+        <ion-input color="dark" formControlName="email"></ion-input>
+        <ion-text color="danger" *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('required')">Kötelező mező!</ion-text>
+        <ion-text color="danger" *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('email')">Kötelező formátum: tesuser@test.com</ion-text>
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" size-md="4" offset-md="4">
+
+          <ion-label position="stacked" color="light" class="ion-padding-bottom">Password</ion-label>
+          <ion-input type="password" color="dark" formControlName="password"></ion-input>
+
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding-top ion-margin-top">
+      <ion-col class="ion-padding-top ion-margin-top" size="12" size-md="4" offset-md="4">
+        <ion-button expand="block" class="login__button" color="primary" (click)="onLogin()" [disabled]="(loginForm.value.email == '' || loginForm.value.password == '') ">Login</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col size="12" size-md="4" offset-md="4">
+        <ion-button expand="block" color="tertiary" class="login__button">Register</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-top">
+      <ion-col size="12" size-md="4" offset-md="4">
+        <p class="ion-text-center login__subtitle">Or sign in With:</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center">
+      <ion-col>
+        <div class="login__logo-div">
+          <ion-icon name="logo-google" size="large"></ion-icon>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="login__logo-div">
+          <ion-icon name="logo-apple" size="large"></ion-icon>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="login__logo-div">
+          <ion-icon name="logo-facebook" size="large"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

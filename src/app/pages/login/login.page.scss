@@ -1,0 +1,48 @@
+@import '../../../theme/variables.scss';
+
+.login{
+  --ion-background-color: #22333B;
+
+  &__title{
+    font-size: 35px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    color: $light;
+    font-family: $secondary-font;
+    text-transform: uppercase;
+  }
+
+  ion-label{
+    font-family: $primary-font;
+    --padding-bottom:10px;
+  }
+
+  ion-input{
+    border: 1px solid $light;
+    border-radius: 10px;
+    background-color: $light;
+    --padding-start:5px;
+    --padding-end:5px;
+    font-family: $primary-font;
+    font-size:14px;
+  }
+
+  &__button{
+    font-size: 18px;
+  }
+
+  &__subtitle{
+    color: $light;
+  }
+
+  &__logo-div{
+    background-color: $light;
+    padding:20px 20px;
+    margin:0 5px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+
