@@ -26,7 +26,44 @@
 @import "~@ionic/angular/css/flex-utils.css";
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Peta&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import './theme/variables.scss';
+
 
 *{
   font-family: 'Poppins', sans-serif;
+}
+
+ion-label{
+  font-family: $primary-font;
+  --padding-bottom:10px;
+}
+
+ion-input{
+  border: 1px solid $light;
+  border-radius: 10px;
+  background-color: $light;
+  --padding-start:5px;
+  --padding-end:5px;
+  font-family: $primary-font;
+  font-size:14px;
+}
+
+.round__button{
+  font-size: 18px;
+  --border-radius: 50px;
+}
+
+.my-custom-class .modal-wrapper{
+  height: 90%;
+  width: 90%;
+  border-radius: 30px;
+  position: fixed;
+  bottom:-10%;
+  background-color: $tertiary;
+}
+
+@media screen and (min-width: 776px) {
+  .my-custom-class .modal-wrapper{
+    width: 50%;
+  }
 }

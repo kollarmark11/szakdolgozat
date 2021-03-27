@@ -9,7 +9,9 @@ export class FirestoreService {
 
   teams: Team[] = [];
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore) {
+    this.getEveryData();
+   }
 
 
   getEveryData(){
@@ -23,5 +25,9 @@ export class FirestoreService {
 
       });
   });
+  }
+
+  pushNewData(itemObject){
+    this.firestore.collection("teams").add(itemObject)
   }
 }

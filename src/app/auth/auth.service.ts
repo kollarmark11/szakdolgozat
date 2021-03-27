@@ -13,27 +13,34 @@ export class AuthService {
 
   constructor(private auth: AngularFireAuth, private router: Router, private toast: ToastService) { }
 
-  standardLogin(email, password){
+  standardLogin(email, password){  // BELÉPÉS FIREBASE AUTHON KERESZTÜL
     this.auth
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
+      .then(() => {  // SIKERES
         this.toast.presentToast('Successfull Login!', 'success');
         this.router.navigateByUrl('home')
       })
-      .catch((error) => {
+      .catch((error) => { //ERROR
         this.toast.presentToast(error.message, 'danger');
       })
   }
 
-  register(email, password){
+  register(email, password){ //REGISZTRACIO
     this.auth
       .createUserWithEmailAndPassword(email, password)
-      .then(() => {
+      .then(() => {  //SIKERES
         this.toast.presentToast('Successfull Register!', 'success');
         this.router.navigateByUrl('home')
       })
-      .catch((error) => {
+      .catch((error) => { // ERROR
         this.toast.presentToast(error.message, 'danger');
+      })
+  }
+
+  logout(){  // KILÉPÉS
+    this.auth.signOut()
+      .then(() => {
+        this.router.navigateByUrl('login') // LOGIN PAGERE NAVIGALAS
       })
   }
 

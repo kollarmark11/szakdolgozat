@@ -1,0 +1,12 @@
+.container{
+  padding: 10% 5%;
+
+  &__icon-div{
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__input-div{
+    padding:20px 0px;
+  }
+}

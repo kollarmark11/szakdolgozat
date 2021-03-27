@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FirestoreService } from '../shared/firestore/firestore.service';
+import { FirestoreService } from '../../shared/firestore/firestore.service';
 
 @Component({
   selector: 'app-home',

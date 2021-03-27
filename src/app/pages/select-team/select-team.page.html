@@ -1,0 +1,30 @@
+<ion-content>
+
+<ion-grid class="ion-padding ion-margin">
+  <ion-row size="12" size-md="4" offset-md="4">
+    <ion-col size="12" size-md="4" offset-md="4">
+      <p class="title ion-text-center ion-padding-top">Select</p>
+      <p class="subtitle_title ion-text-center">Team</p>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class=" ion-padding-top ion-margin-top">
+    <ion-col size="12" size-md="4" offset-md="4">
+      <ion-button expand="block" color="tertiary" class="team_button" fill="outline" (click)="presentAddTeamModal()">+ Add Team</ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngFor="let item of teams">
+    <ion-col size="12" size-md="4" offset-md="4">
+      <ion-button expand="block" color="tertiary" class="team_button">{{ item.data.name }}</ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class=" ion-padding-top ion-margin-top">
+    <ion-col size="12" size-md="4" offset-md="4">
+      <ion-button expand="block" color="danger" class="team_button" (click)="onLogout()">Logout</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+</ion-content>
