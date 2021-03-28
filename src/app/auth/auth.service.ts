@@ -10,6 +10,7 @@ import { ToastService } from '../shared/toast.service';
 export class AuthService {
 
   errorMessage: string;
+  email: string;
 
   constructor(private auth: AngularFireAuth, private router: Router, private toast: ToastService) { }
 
@@ -44,6 +45,13 @@ export class AuthService {
       })
   }
 
+  currentEmail(){  // PROMISE KELL!!! resolve
+      return new Promise((resolve, reject) => {
+        this.auth.user.subscribe(user => {
+          resolve(user.email)
+        }, reject)
+      })
+  }
 
 
 }

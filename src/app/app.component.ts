@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';;
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from './auth/auth.service';
+;
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -7,12 +9,21 @@ import { AngularFirestore } from '@angular/fire/firestore';;
 })
 export class AppComponent implements OnInit {
 
+  email: any;
 
-  constructor() {
+
+  constructor(private auth: AuthService) {
   }
 
   ngOnInit(){
+    this.getEmail();
 
+  }
+
+  getEmail(){
+    this.auth.currentEmail().then((user) => {
+      this.email = user;
+    });
   }
 
 }
