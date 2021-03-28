@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { Team } from 'src/app/shared/team.model';
 import { FirestoreService } from '../../shared/firestore/firestore.service';
 
@@ -15,7 +16,7 @@ export class HomePage implements OnInit{
   actualId:string;
 
 
-  constructor(private route : ActivatedRoute, private dataBase: FirestoreService) {
+  constructor(private route : ActivatedRoute, private dataBase: FirestoreService, private navCtrl: NavController, private router: Router) {
   }
 
   ngOnInit(){
@@ -26,6 +27,9 @@ export class HomePage implements OnInit{
   async getActualDoc(){
     await this.dataBase.getOneDocData(this.actualId).then(() => {
       this.actualTeam = this.dataBase.docData  // beledobjuk az aktualis objectbe then azért kell, hogy utána fusson le, miután már lefutott az alapfüggvény, ki kell majd próbálni async nélkül
+    })
+    .catch(() => {
+      this.router.navigateByUrl('/select-team')
     })
 
   }

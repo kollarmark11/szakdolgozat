@@ -1,0 +1,19 @@
+<div class="container" [formGroup]="addPlayerForm">
+  <div class="container__icon-div">
+    <ion-icon name="close-circle-outline" size="large" (click)="onCancel()"></ion-icon>
+  </div>
+  <div class="container__input-div">
+    <ion-label>Player name: {{ id }}</ion-label>
+    <ion-input formControlName="name"></ion-input>
+  </div>
+
+  <div class="container__input-div">
+    <ion-label>Player age:</ion-label>
+    <ion-input formControlName="age"></ion-input>
+  </div>
+  <div>
+    <ion-button color="light" expand="block" class="round__button" (click)="addPlayer()">+ Add Team</ion-button>
+  </div>
+</div>
+
+

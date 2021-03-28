@@ -26,7 +26,7 @@
 
   <ion-row *ngFor="let item of teams">
     <ion-col size="12" size-md="4" offset-md="4">
-      <ion-button expand="block" color="tertiary" class="team_button" (click)="selectTeam(item)" [routerLink]="['/home/' , item.id ]">{{ item.data.name}}</ion-button> <!-- Jó helyre irányítson minket! fontos paramMap home routing module -->
+      <ion-button expand="block" color="tertiary" class="team_button" (click)="selectTeam(item)" [routerLink]="['/home/' , item.id ]" >{{ item.data.name}}</ion-button> <!-- Jó helyre irányítson minket! fontos paramMap home routing module -->
     </ion-col>
   </ion-row>
 

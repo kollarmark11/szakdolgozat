@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'select-team',
     loadChildren: () => import('./pages/select-team/select-team.module').then( m => m.SelectTeamPageModule)
   },
+  {
+    path: 'players',
+    loadChildren: () => import('./pages/players/players.module').then( m => m.PlayersPageModule)
+  },
 ];
 
 @NgModule({

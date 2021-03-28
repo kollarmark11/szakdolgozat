@@ -22,7 +22,10 @@ export class AppComponent implements OnInit {
 
   getEmail(){
     this.auth.currentEmail().then((user) => {
-      this.email = user;
+        this.email = user;
+    })
+    .catch(() => {
+      this.email = ''
     });
   }
 

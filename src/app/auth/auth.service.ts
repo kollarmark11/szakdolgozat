@@ -48,10 +48,13 @@ export class AuthService {
   currentEmail(){  // PROMISE KELL!!! resolve
       return new Promise((resolve, reject) => {
         this.auth.user.subscribe(user => {
-          resolve(user.email)
+          if(user){
+            resolve(user.email)
+          } else {
+            reject
+          }
         }, reject)
       })
   }
-
 
 }

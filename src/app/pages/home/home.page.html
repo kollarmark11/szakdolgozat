@@ -15,3 +15,61 @@
 <ion-content>
   <ion-text>{{ actualTeam.name }}</ion-text>
 </ion-content>
+
+
+
+
+
+
+<ion-menu side="end" contentId="main" type="overlay" class="sidemenu">
+
+  <ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-avatar slot="start" class="ion-padding">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar>
+      <ion-text class="email"></ion-text>
+      <ion-buttons slot="end">
+        <ion-menu-toggle>
+          <ion-button>
+            <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-menu-toggle>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content color="tertiary">
+    <ion-list color="tertiary">
+
+      <ion-menu-toggle>
+        <ion-item [routerLink]="['/players']" [queryParams]="{id: actualId}" lines="none" detail="false">
+          <ion-label color="light">Players</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+
+      <ion-list class="logout">
+        <ion-menu-toggle color="tertiary">
+          <ion-item routerLink="/select-team" lines="none" detail="false">
+            <ion-button expand="block" color="light" fill="outline" size="medium">Switch Team</ion-button>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle >
+          <ion-item routerLink="/login" lines="none" detail="false">
+            <ion-button expand="block" color="danger" size="medium">Logout</ion-button>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+
+
+
+
+
+  </ion-content>
+
+
+</ion-menu>
+
+<ion-router-outlet id="main"></ion-router-outlet>

@@ -1,3 +1,5 @@
+@import '../theme/variables.scss';
+
 .logout{
   position: fixed;
   bottom:10%;
@@ -7,6 +9,18 @@
   ion-button{
     width: 100%;
 
+  }
+}
+
+.sidemenu{
+
+  ion-list{
+    padding:0;
+  }
+
+  ion-item{
+    --background: #8F8073;
+    --padding-top:0;
   }
 }
 
