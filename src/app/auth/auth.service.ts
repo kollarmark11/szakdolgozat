@@ -18,7 +18,7 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(() => {  // SIKERES
         this.toast.presentToast('Successfull Login!', 'success');
-        this.router.navigateByUrl('home')
+        this.router.navigateByUrl('select-team')
       })
       .catch((error) => { //ERROR
         this.toast.presentToast(error.message, 'danger');
@@ -30,7 +30,7 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then(() => {  //SIKERES
         this.toast.presentToast('Successfull Register!', 'success');
-        this.router.navigateByUrl('home')
+        this.router.navigateByUrl('login')
       })
       .catch((error) => { // ERROR
         this.toast.presentToast(error.message, 'danger');

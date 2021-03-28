@@ -8,6 +8,7 @@ import { Team } from '../team.model';
 export class FirestoreService {
 
   teams: Team[] = [];
+  docData: any;
 
   constructor(private firestore: AngularFirestore) {
     this.getEveryData();
@@ -15,6 +16,7 @@ export class FirestoreService {
 
 
   getEveryData(){
+    this.teams = []
     this.firestore.collection("teams").get().toPromise().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         let data = new Team();
@@ -25,6 +27,13 @@ export class FirestoreService {
 
       });
   });
+  }
+
+  async getOneDocData(id){
+    await this.firestore.collection('teams').doc(id).ref.get()
+      .then(doc => {
+        this.docData = doc.data();
+      })
   }
 
   pushNewData(itemObject){

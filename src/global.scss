@@ -33,6 +33,11 @@
   font-family: 'Poppins', sans-serif;
 }
 
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+}
+
 ion-label{
   font-family: $primary-font;
   --padding-bottom:10px;

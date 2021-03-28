@@ -14,9 +14,19 @@
     </ion-col>
   </ion-row>
 
+  <ion-row *ngIf="teams.length === 0"> <!-- Ha 0 a hossza(nincs benne az elem) akkor szöveg -->
+    <ion-col size="12" size-md="4" offset-md="4" class="ion-text-center">
+      <ion-text color="light">You don't have team yet. Please add a team and start the coaching!</ion-text>
+        <ion-skeleton-text animated style="width: 100%; border-radius: 30px;" class="ion-margin-top ion-padding"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 100%; border-radius: 30px;" class="ion-margin-top ion-padding"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 100%; border-radius: 30px;" class="ion-margin-top ion-padding"></ion-skeleton-text>
+
+    </ion-col>
+  </ion-row>
+
   <ion-row *ngFor="let item of teams">
     <ion-col size="12" size-md="4" offset-md="4">
-      <ion-button expand="block" color="tertiary" class="team_button">{{ item.data.name }}</ion-button>
+      <ion-button expand="block" color="tertiary" class="team_button" (click)="selectTeam(item)" [routerLink]="['/home/' , item.id ]">{{ item.data.name}}</ion-button> <!-- Jó helyre irányítson minket! fontos paramMap home routing module -->
     </ion-col>
   </ion-row>
 

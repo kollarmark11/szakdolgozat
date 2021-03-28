@@ -4,6 +4,19 @@ ion-header{
   background-color: $background-color;
 }
 
+ion-toolbar{
+  --background: #22333B;
+
+  ion-back-button{
+    font-family: $secondary-font;
+  }
+
+  ion-title{
+    font-family: $primary-font;
+  }
+
+}
+
 ion-content{
   --background: #22333B;
 }

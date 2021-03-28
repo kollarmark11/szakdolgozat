@@ -1,21 +1,17 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
+<ion-header>
+
+  <ion-toolbar color="primary">
+    <ion-title color="light">
       Blank
     </ion-title>
+    <ion-menu-button color="light" slot="end"></ion-menu-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content *ngIf="!actualTeam">
 
-  <div *ngFor="let item of allTeam">
-    <ion-text>{{ item.id }}</ion-text>
-    <ion-text>{{ item.data.name }}</ion-text>
-    <ion-text>{{ item.data.number }}</ion-text>
-    </div>
+</ion-content>
+
+<ion-content>
+  <ion-text>{{ actualTeam.name }}</ion-text>
 </ion-content>

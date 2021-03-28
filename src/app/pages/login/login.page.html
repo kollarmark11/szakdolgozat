@@ -26,7 +26,7 @@
     </ion-row>
     <ion-row class="ion-padding-top ion-margin-top">
       <ion-col class="ion-padding-top ion-margin-top" size="12" size-md="4" offset-md="4">
-        <ion-button expand="block" class="login__button" color="primary" (click)="onLogin()" [disabled]="(loginForm.value.email == '' || loginForm.value.password == '') ">Login</ion-button>
+        <ion-button expand="block" class="login__button" color="primary" (click)="onLogin()" [disabled]="(loginForm.value.email == null || loginForm.value.password == null) ">Login</ion-button>
       </ion-col>
     </ion-row>
     <ion-row >

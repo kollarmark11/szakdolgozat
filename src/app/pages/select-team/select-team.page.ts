@@ -12,13 +12,13 @@ import { AddTeamComponent } from './add-team/add-team.component';
 })
 export class SelectTeamPage implements OnInit {
 
-  teams: Team[] = [];
+  teams: Team[];
   addTeamModal: any;
 
   constructor(private modalCtrl: ModalController, private firestore: FirestoreService, private auth: AuthService) { }
 
   ngOnInit() {
-    this.teams = this.firestore.teams
+    this.teams = this.firestore.teams;
   }
 
   async presentAddTeamModal(){  // MODAL PRESENT
@@ -29,9 +29,10 @@ export class SelectTeamPage implements OnInit {
     this.addTeamModal.onDidDismiss()  // HA bezárul a modal, az adatot megkapjuk és hozzáadjuk a teams tömbhöz
       .then((data) => {
         if(data.data != null) { // kihozott adatot vizsgáljuk, ha null az érték, akkor marad minden
-          this.teams.push(data);
+          this.getEveryTeamData()
+          console.log(this.teams)
+          this.teams = this.firestore.teams;
         } else {
-          this.teams = this.teams;
         }
       })
     return await this.addTeamModal.present();
@@ -44,6 +45,10 @@ export class SelectTeamPage implements OnInit {
 
   onLogout(){
     this.auth.logout();
+  }
+
+  selectTeam(item){
+    console.log(item.id)
   }
 
 
