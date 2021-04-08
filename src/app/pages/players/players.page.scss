@@ -23,9 +23,8 @@ ion-content{
 ion-list{
   width: 100%;
 
-  ion-item{
+  ion-item-sliding{
     width: 100%;
-    padding:8px 0;
     border-bottom: 1px solid $light;
 
 
@@ -34,9 +33,14 @@ ion-list{
       color: $light;
       font-family: $secondary-font;
       font-size: 22px;
+      margin:0;
     }
   }
   ion-item:last-child{
     border-bottom: none;
   }
+}
+
+.age{
+  font-size: 13px;
 }

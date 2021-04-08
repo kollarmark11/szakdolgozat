@@ -17,7 +17,6 @@ import { AddTeamComponent } from './add-team/add-team.component';
     SelectTeamPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [SelectTeamPage, AddTeamComponent],
-  entryComponents: [AddTeamComponent]
+  declarations: [SelectTeamPage, AddTeamComponent]
 })
 export class SelectTeamPageModule {}

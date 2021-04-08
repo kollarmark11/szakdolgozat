@@ -7,6 +7,10 @@ import { IonicModule } from '@ionic/angular';
 import { PlayersPageRoutingModule } from './players-routing.module';
 
 import { PlayersPage } from './players.page';
+import { AddPlayerComponent } from './add-player/add-player.component';
+import { PlayerDetailComponent } from './player-detail/player-detail.component';
+import { PositionPipe } from 'src/app/pipes/position.pipe';
+import { InjuredPipe } from 'src/app/pipes/injured.pipe';
 
 @NgModule({
   imports: [
@@ -16,6 +20,7 @@ import { PlayersPage } from './players.page';
     PlayersPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [PlayersPage]
+  declarations: [PlayersPage, PlayerDetailComponent, PositionPipe, InjuredPipe],
+  entryComponents: [AddPlayerComponent]
 })
 export class PlayersPageModule {}

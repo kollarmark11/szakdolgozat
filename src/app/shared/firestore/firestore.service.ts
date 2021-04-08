@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Player } from '../player.model';
-import { Team } from '../team.model';
+import { Player } from '../interfaces/player.model';
+import { Team } from '../interfaces/team.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,8 +42,12 @@ export class FirestoreService {
     this.firestore.collection("teams").add(itemObject)
   }
 
-  pushDocData(id, obj){
-    this.firestore.collection("teams").doc(id).collection('players').add(obj)
+  deleteSubDoc(id, secondCollection, docId){
+    this.firestore.collection("teams").doc(id).collection(secondCollection).doc(docId).delete()
+  }
+
+  pushDocData(id, secondCollection ,obj){
+    this.firestore.collection("teams").doc(id).collection(secondCollection).add(obj)
 
    /*  this.getOneDocData(id).then(() => {
       console.log(this.docData.players)

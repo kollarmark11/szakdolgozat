@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FirestoreService } from 'src/app/shared/firestore/firestore.service';
-import { Team } from 'src/app/shared/team.model';
+import { Team } from 'src/app/shared/interfaces/team.model';
 import { AddTeamComponent } from './add-team/add-team.component';
 
 @Component({

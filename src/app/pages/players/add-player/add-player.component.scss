@@ -1,0 +1,49 @@
+@import '../../../../theme/variables.scss';
+
+.container{
+  padding:20px 5%;
+
+  &__input-div{
+    padding: 5px 0;
+
+  }
+
+  &__button-div{
+    padding:15px 0;
+    margin-bottom:30px;
+  }
+
+  &__toggle-div{
+    display:flex !important;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding:10px 0;
+  }
+
+}
+
+.icon-div{
+  padding:5px 5px;
+  text-align: right;
+}
+
+ion-range{
+  padding-top:5px;
+  --bar-height: 5px;
+  --knob-size: 18px;
+  --knob-box-shadow: 0px 0px 0px 3px #fff;
+}
+
+ion-input, ion-textarea{
+  --padding-start: 5px;
+  --padding-end: 5px;
+}
+
+ion-select{
+  border:1px solid $light;
+  border-radius: 5px;
+  padding:5px;
+}
+
+

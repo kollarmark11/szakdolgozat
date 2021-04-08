@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { Team } from 'src/app/shared/team.model';
 import { FirestoreService } from '../../shared/firestore/firestore.service';
 
 @Component({

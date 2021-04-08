@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { FirestoreService } from 'src/app/shared/firestore/firestore.service';
-import { Team } from 'src/app/shared/team.model';
 
 @Component({
   selector: 'app-add-team',

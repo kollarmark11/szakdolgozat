@@ -1,0 +1,53 @@
+@import '../../../../theme/variables.scss';
+
+ion-toolbar, ion-content{
+  --background: #22333B;
+  color: $light;
+}
+
+ion-grid{
+  margin: 0;
+  padding: 0;
+}
+
+.main-data{
+  background-color: #22333B;
+  margin:0;
+  padding:30px 0;
+}
+
+.sub-data{
+  background-color: $light;
+  border-radius: 10px 10px 0 0;
+  height: 100%;
+}
+
+.name{
+  font-family: $secondary-font;
+  text-align: center;
+  color: $light;
+}
+.age{
+  font-family: $secondary-font;
+  font-size: 14px;
+  text-align: center;
+  color: $light;
+}
+
+.progress-bar{
+  padding:3px 0;
+  border-radius: 10px;
+}
+
+.subposition{
+  display: block;
+}
+
+.line{
+  border-top: 1px solid $primary;
+}
+
+.note{
+  display: block;
+  text-align:justify ;
+}

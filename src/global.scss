@@ -33,17 +33,12 @@
   font-family: 'Poppins', sans-serif;
 }
 
-::-webkit-scrollbar,
-*::-webkit-scrollbar {
-  display: none;
-}
-
 ion-label{
   font-family: $primary-font;
   --padding-bottom:10px;
 }
 
-ion-input{
+ion-input, ion-textarea{
   border: 1px solid $light;
   border-radius: 10px;
   background-color: $light;
@@ -59,12 +54,21 @@ ion-input{
 }
 
 .my-custom-class .modal-wrapper{
-  height: 90%;
+  max-height: 90vh;
   width: 90%;
   border-radius: 30px;
   position: fixed;
   bottom:-10%;
   background-color: $tertiary;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.add-player-modal .modal-wrapper{
+  background-color: $tertiary !important;
+}
+
+.alert-wrapper{
+  width: 100% !important;
 }
 
 @media screen and (min-width: 776px) {

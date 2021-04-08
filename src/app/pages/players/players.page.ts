@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { FirestoreService } from 'src/app/shared/firestore/firestore.service';
 import { AddPlayerComponent } from './add-player/add-player.component';
+import { PlayerDetailComponent } from './player-detail/player-detail.component';
 
 @Component({
   selector: 'app-players',
@@ -30,7 +31,7 @@ export class PlayersPage implements OnInit {
   async presentAddModal(){
     this.addPlayerModal = await this.modalCtrl.create({
       component: AddPlayerComponent,
-      cssClass: 'my-custom-class',
+      cssClass: 'add-player-modal',
       componentProps: {
         id: this.actualId
       }
@@ -45,5 +46,36 @@ export class PlayersPage implements OnInit {
       })
     return await this.addPlayerModal.present();
   }
+
+
+  async presentDetailModal(id){
+    console.log(id)
+    console.log('actualid: ' + this.actualId)
+    const modal = await this.modalCtrl.create({
+      component: PlayerDetailComponent,
+      cssClass: 'player-detail-modal',
+      componentProps: {
+        playerId: id,
+        actualId: this.actualId,
+      }
+    });
+    modal.onDidDismiss()
+      .then((data) => {
+        if(data.data === 'delete'){
+          this.firestore.getCollectionEveryData(this.actualId, 'players');
+          this.everyPlayer = this.firestore.players;
+        }
+      })
+    return await modal.present();
+  }
+
+  deletePlayer(playerId){
+    this.firestore.deleteSubDoc(this.actualId, 'players', playerId)
+    this.firestore.getCollectionEveryData(this.actualId, 'players');
+    this.everyPlayer = this.firestore.players;
+
+    //KELL EGY POPUP vagymi, hogy sikeres elmentes
+  }
+
 
 }

@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon name="arrow-back-outline" class="ion-padding-horizontal" size="large" color="light" slot="start" (click)="onCancel()"></ion-icon>
+    <ion-icon name="trash-outline" class="ion-padding-horizontal" size="large" color="light" slot="end" (click)="deletePlayer()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="playerData">
+  <ion-grid>
+    <ion-row class="main-data">
+      <ion-col>
+        <h1 class="name">{{ playerData.data.firstname }} {{ playerData.data.lastname }}</h1>
+        <h2 class="age">{{ playerData.data.age }} years old</h2>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="sub-data">
+      <ion-col>
+        <ion-card class="ion-padding">
+          <ion-row>
+            <ion-col size="4">Main position:</ion-col>
+            <ion-col size="8" class="ion-text-right">{{ playerData.data.mainPosition | position }}</ion-col>
+          </ion-row>
+          <hr class="line">
+          <ion-row>
+            <ion-col size="4">Sub position:</ion-col>
+            <ion-col size="8" class="ion-text-right" >
+              <ion-text class="subposition" *ngFor="let item of playerData.data.subPosition"> {{ item | position}}</ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+        <ion-card class="ion-padding">
+          <ion-row>
+            <ion-col>Injured:</ion-col>
+            <ion-col class="ion-text-right">{{ playerData.data.isInjured | injured}}</ion-col>
+          </ion-row>
+        </ion-card>
+
+        <ion-card class="ion-padding">
+          <ion-row>
+            <ion-col>Height:</ion-col>
+            <ion-col class="ion-text-right">{{ playerData.data.height }} cm</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>Weight:</ion-col>
+            <ion-col class="ion-text-right">{{ playerData.data.weight }} kg</ion-col>
+          </ion-row>
+        </ion-card>
+
+        <ion-card class="ion-padding">
+          <ion-row>
+            <ion-col>
+              <ion-text class="ion-margin-bottom">Speed: {{ playerData.data.speed }}/10</ion-text>
+              <ion-progress-bar class="ion-margin-top progress-bar" [value]="playerData.data.speed/10"></ion-progress-bar>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+        <ion-card class="ion-padding">
+          <ion-row>
+            <ion-col>
+              <ion-text class="ion-margin-bottom">Creativity: {{ playerData.data.creativity }}/10</ion-text>
+              <ion-progress-bar class="ion-margin-top progress-bar" [value]="playerData.data.creativity/10"></ion-progress-bar>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+        <ion-card class="ion-padding">
+          <ion-row>
+            <ion-col>
+              <ion-text class="ion-margin-bottom">Stamina: {{ playerData.data.stamina }}/10</ion-text>
+              <ion-progress-bar class="ion-margin-top progress-bar" [value]="playerData.data.stamina/10"></ion-progress-bar>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+        <ion-card class="ion-padding">
+          <ion-row>
+            <ion-col>
+              <ion-text class="ion-margin-bottom">Note:</ion-text>
+              <ion-text color="primary note">{{ playerData.data.note }}</ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-content *ngIf="!playerData">
+  <ion-skeleton-text animated style="width: 100%; border-radius: 30px;" class="ion-margin-top ion-padding"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 100%; border-radius: 30px;" class="ion-margin-top ion-padding"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 100%; border-radius: 30px;" class="ion-margin-top ion-padding"></ion-skeleton-text>
+</ion-content>
+

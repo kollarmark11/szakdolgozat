@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { FirestoreService } from 'src/app/shared/firestore/firestore.service';
 
@@ -18,15 +18,25 @@ export class AddPlayerComponent implements OnInit {
 
   ngOnInit() {
     this.addPlayerForm = this.fb.group({
-      name: new FormControl(''),
-      age: new FormControl('')
+      firstname: new FormControl('', Validators.required),
+      lastname: new FormControl('', Validators.required),
+      age: new FormControl(0, Validators.required),
+      height: new FormControl(0),
+      weight: new FormControl(0),
+      mainPosition: new FormControl('Unknown'),
+      subPosition: new FormControl('Unknown'),
+      isInjured: new FormControl(false),
+      speed: new FormControl(0),
+      stamina: new FormControl(0),
+      creativity: new FormControl(0),
+      note: new FormControl('', Validators.maxLength(200))
     })
 
 
   }
 
   addPlayer(){
-    this.firestore.pushDocData(this.id, this.addPlayerForm.value)
+    this.firestore.pushDocData(this.id, 'players', this.addPlayerForm.value)
     this.modalCtrl.dismiss('success')
   }
 
