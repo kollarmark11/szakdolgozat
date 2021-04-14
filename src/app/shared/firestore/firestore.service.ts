@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Match } from '../interfaces/match.model';
 import { Player } from '../interfaces/player.model';
 import { Team } from '../interfaces/team.model';
 
@@ -11,6 +12,7 @@ export class FirestoreService {
   teams: Team[] = [];
   players: Player[] = [];
   docData: any;
+  matches: Match[] = [];
 
   constructor(private firestore: AngularFirestore) {
     this.getEveryData();
@@ -80,7 +82,20 @@ export class FirestoreService {
         this.players.push(data)
 
       })
-      console.log(this.players)
+    })
+  }
+
+  getEveryMatch(id){ // COLLECTIONON BELÜLI COLLECTION(mint az array). kiszedjük belőle a dolgokat. az elején reseteljük a tömböt
+    this.matches = [];
+    this.firestore.collection("teams").doc(id).collection('matches').get().toPromise()
+    .then(query => {
+      query.forEach(doc => {
+        let data = new Player();
+        data.id = doc.id,
+        data.data = doc.data()
+        this.matches.push(data)
+
+      })
     })
   }
 }

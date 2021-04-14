@@ -1,23 +1,24 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-icon name="arrow-back-outline" class="ion-padding-horizontal" size="large" color="light" slot="start" (click)="onCancel()"></ion-icon>
     <ion-buttons slot="end">
-      <ion-icon name="create-outline" class="ion-padding-horizontal" size="large" color="light" (click)="editData()"></ion-icon>
+      <ion-icon name="create-outline" size="large" color="light"></ion-icon>
       <ion-icon name="trash-outline" class="ion-padding-horizontal" size="large" color="light" (click)="presentAlert()"></ion-icon>
     </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="playerData && !edit">
+<ion-content *ngIf="matchData">
   <ion-grid>
     <ion-row class="main-data">
       <ion-col>
-        <h1 class="name">{{ playerData.data.firstname }} {{ playerData.data.lastname }}</h1>
-        <h2 class="age">{{ playerData.data.age }} years old</h2>
+        <h1 class="name" style="display: block;">{{ matchData.data.midfielders }}</h1>
+        <h2 class="age">{{ matchData.data.date }} years old</h2>
       </ion-col>
     </ion-row>
 
-    <ion-row class="sub-data">
+    <!-- <ion-row class="sub-data">
       <ion-col>
         <ion-card class="ion-padding">
           <ion-row>
@@ -85,18 +86,12 @@
               <ion-text color="primary note">{{ playerData.data.note }}</ion-text>
             </ion-col>
           </ion-row>
-        </ion-card>
+        </ion-card> -->
 
-      </ion-col>
-    </ion-row>
   </ion-grid>
 </ion-content>
 
-<ion-content *ngIf="edit">
-  <p>asd</p>
-</ion-content>
-
-<ion-content *ngIf="!playerData">
+<ion-content *ngIf="!matchData">
   <ion-skeleton-text animated style="width: 100%; border-radius: 30px;" class="ion-margin-top ion-padding"></ion-skeleton-text>
         <ion-skeleton-text animated style="width: 100%; border-radius: 30px;" class="ion-margin-top ion-padding"></ion-skeleton-text>
         <ion-skeleton-text animated style="width: 100%; border-radius: 30px;" class="ion-margin-top ion-padding"></ion-skeleton-text>

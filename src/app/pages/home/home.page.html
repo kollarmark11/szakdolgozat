@@ -14,6 +14,51 @@
 
 <ion-content>
   <ion-text>{{ actualTeam.name }}</ion-text>
+  <ion-text></ion-text>
+
+  <ion-card>
+    <ion-card-header color="primary">
+      <ion-card-title>Match Results</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="home__card__div">
+        <p>Wins</p>
+        <p>{{ wins }}</p>
+      </div>
+
+      <div class="home__card__div">
+        <p>Loses</p>
+        <p>{{ lose }}</p>
+      </div>
+
+      <div class="home__card__div">
+        <p>Draw</p>
+        <p>{{ draw }}</p>
+      </div>
+
+      <p>Win ratio: {{ wins/(wins + lose + draw) * 100 | number: '1.0-0'}}%</p>
+      <ion-progress-bar [value]="wins/(wins + lose + draw)"></ion-progress-bar>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color="primary">
+      <ion-card-title>Goals</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="home__card__div">
+        <p>Rúgott gólok:</p>
+        <p>{{ ourGoals }}</p>
+      </div>
+
+      <div class="home__card__div">
+        <p>Kapott gólok:</p>
+        <p>{{ opponentGoals }}</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 
 
@@ -47,6 +92,12 @@
           <ion-label color="light">Players</ion-label>
         </ion-item>
       </ion-menu-toggle>
+
+      <ion-menu-toggle>
+        <ion-item [routerLink]="['/matches']" [queryParams]="{id: actualId}" lines="none" detail="false">
+          <ion-label color="light">Matches</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
     </ion-list>
 
       <ion-list class="logout">
@@ -62,6 +113,8 @@
           </ion-item>
         </ion-menu-toggle>
       </ion-list>
+
+
 
 
 

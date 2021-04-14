@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Matches</ion-title>
+      <ion-buttons color="primary" slot="start">
+        <ion-back-button color="light" defaultHref="/select-team"></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="matches">
+    <ion-row>
+      <ion-col>
+        <p class="matches__title" (click)="getdata()">Matches</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" color="tertiary" (click)="presentAddModal()">Add match</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+
+      <ion-card class="matches__card" *ngFor="let match of everyMatch" (click)="presentDetailModal(match.id)">
+        <ion-card-content >
+          <ion-row class="matches__card__content">
+            <ion-col size="9" class="matches__card__content__left">
+              <ion-text class="matches__card__content__left__name">{{match.data.name}}</ion-text>
+              <ion-text class="matches__card__content__left__opponent">VS {{match.data.opponent}}</ion-text>
+              <ion-text class="matches__card__content__left__date">{{match.data.date | date: 'YYYY.MM.d'}}</ion-text>
+            </ion-col>
+            <ion-col size="3" class="matches__card__content__right">
+              <ion-text class="matches__card__content__right__result">{{match.data.yourGoals}} - {{match.data.opponentGoals}}</ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+
+
+
+
+    </ion-row>
+  </ion-grid>
+</ion-content>

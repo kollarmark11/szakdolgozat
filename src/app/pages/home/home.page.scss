@@ -1,3 +1,24 @@
+@import '../../../theme/variables.scss';
+
+
+
+ion-content{
+  --background: #22333B;
+  color: $light;
+}
+
+.home{
+
+  &__card{
+
+
+    &__div{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+}
 
 .sidemenu{
 

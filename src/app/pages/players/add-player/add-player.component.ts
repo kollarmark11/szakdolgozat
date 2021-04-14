@@ -36,6 +36,7 @@ export class AddPlayerComponent implements OnInit {
   }
 
   addPlayer(){
+    console.log(this.addPlayerForm.value)
     this.firestore.pushDocData(this.id, 'players', this.addPlayerForm.value)
     this.modalCtrl.dismiss('success')
   }

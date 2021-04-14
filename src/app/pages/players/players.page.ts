@@ -31,7 +31,7 @@ export class PlayersPage implements OnInit {
   async presentAddModal(){
     this.addPlayerModal = await this.modalCtrl.create({
       component: AddPlayerComponent,
-      cssClass: 'add-player-modal',
+      cssClass: 'add-modal',
       componentProps: {
         id: this.actualId
       }
