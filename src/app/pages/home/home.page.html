@@ -1,73 +1,117 @@
 <ion-header>
-
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-title color="light">
-      Blank
+      {{ actualTeam.name }}
     </ion-title>
-    <ion-menu-button color="light" slot="end"></ion-menu-button>
+    <!-- <ion-menu-button color="light" slot="end"></ion-menu-button> -->
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="!actualTeam">
-
-</ion-content>
-
 <ion-content>
-  <ion-text>{{ actualTeam.name }}</ion-text>
-  <ion-text></ion-text>
 
-  <ion-card>
-    <ion-card-header color="primary">
-      <ion-card-title>Match Results</ion-card-title>
-    </ion-card-header>
+  <!-- <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.5" pullMin="100" pullMax="200">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher> -->
 
-    <ion-card-content>
-      <div class="home__card__div">
-        <p>Wins</p>
-        <p>{{ wins }}</p>
-      </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-center ion-padding-vertical ion-margin-vertical">
+        <ion-text class="home__title">{{ actualTeam.name }}</ion-text>
+      </ion-col>
+    </ion-row>
 
-      <div class="home__card__div">
-        <p>Loses</p>
-        <p>{{ lose }}</p>
-      </div>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <circle-progress
+          [percent]=" wins/(wins + lose + draw) * 100"
+          [radius]="100"
+          [outerStrokeWidth]="12"
+          [innerStrokeWidth]="3"
+          [outerStrokeColor]="'#2dd36f'"
+          [innerStrokeColor]="'#ffffff'"
+          [animation]="true"
+          [animationDuration]="500"
+          [titleFontSize]="'30'"
+          [titleColor]="'#ffffff'"
+          [subtitle]="'Win ratio'"
+          [subtitleFontSize]="'20'"
+          [unitsColor]="'#ffffff'"
+          [unitsFontSize]="'20'"
+          ></circle-progress>
+      </ion-col>
+    </ion-row>
 
-      <div class="home__card__div">
-        <p>Draw</p>
-        <p>{{ draw }}</p>
-      </div>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <div class="home__result__div wins">
+          <p>Wins</p>
+          <p>{{ wins }}</p>
+        </div>
+      </ion-col>
+      <ion-col class="ion-text-center">
+        <div class="home__result__div draws">
+          <p>Draws</p>
+          <p>{{ draw }}</p>
+        </div>
+      </ion-col>
+      <ion-col class="ion-text-center">
+        <div class="home__result__div loses">
+          <p>Loses</p>
+          <p>{{ lose }}</p>
+        </div>
+      </ion-col>
+    </ion-row>
 
-      <p>Win ratio: {{ wins/(wins + lose + draw) * 100 | number: '1.0-0'}}%</p>
-      <ion-progress-bar [value]="wins/(wins + lose + draw)"></ion-progress-bar>
-    </ion-card-content>
-  </ion-card>
+    <ion-row>
+      <ion-col class="ion-no-padding ion-no-margin">
+        <div class="home__card">
+          <p>Scored goals:</p>
+          <p>{{ ourGoals }}</p>
+        </div>
+      </ion-col>
+    </ion-row>
 
-  <ion-card>
-    <ion-card-header color="primary">
-      <ion-card-title>Goals</ion-card-title>
-    </ion-card-header>
+    <ion-row>
+      <ion-col class="ion-no-padding ion-no-margin">
+        <div class="home__card">
+          <p>Conceded goals:</p>
+          <p>{{ opponentGoals }}</p>
+        </div>
+      </ion-col>
+    </ion-row>
 
-    <ion-card-content>
-      <div class="home__card__div">
-        <p>Rúgott gólok:</p>
-        <p>{{ ourGoals }}</p>
-      </div>
+  </ion-grid>
 
-      <div class="home__card__div">
-        <p>Kapott gólok:</p>
-        <p>{{ opponentGoals }}</p>
-      </div>
-    </ion-card-content>
-  </ion-card>
+
 </ion-content>
 
+  <ion-tab-bar slot="bottom" class="tab-bar">
+    <ion-tab-button tab="matches" routerLink="/matches" [queryParams]="{id: actualId}">
+      <ion-icon name="football-outline"></ion-icon>
+      <ion-label>Matches</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="players" routerLink="/players" [queryParams]="{id: actualId}">
+      <ion-icon name="people-outline"></ion-icon>
+      <ion-label>Players</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="select-team" routerLink="/select-team">
+      <ion-icon name="enter-outline"></ion-icon>
+      <ion-label>Select Team</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="login" routerLink="/login">
+      <ion-icon name="log-out-outline" color="danger"></ion-icon>
+      <ion-label color="danger" class="danger">Logout</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
 
 
 
+<!-- SIDEMENU -->
 
-
-<ion-menu side="end" contentId="main" type="overlay" class="sidemenu">
-
+<!-- <ion-menu side="end" contentId="main" type="overlay" class="sidemenu">
   <ion-header>
     <ion-toolbar color="tertiary">
       <ion-avatar slot="start" class="ion-padding">
@@ -102,27 +146,18 @@
 
       <ion-list class="logout">
         <ion-menu-toggle color="tertiary">
-          <ion-item routerLink="/select-team" lines="none" detail="false">
-            <ion-button expand="block" color="light" fill="outline" size="medium">Switch Team</ion-button>
+          <ion-item routerLink="/select-team" lines="none" detail="false" routerDirection="back">
+            <ion-button class="bottom-button" color="light" fill="outline" size="medium">Switch Team</ion-button>
           </ion-item>
         </ion-menu-toggle>
 
         <ion-menu-toggle >
           <ion-item routerLink="/login" lines="none" detail="false">
-            <ion-button expand="block" color="danger" size="medium">Logout</ion-button>
+            <ion-button class="bottom-button" color="danger" size="medium">Logout</ion-button>
           </ion-item>
         </ion-menu-toggle>
       </ion-list>
-
-
-
-
-
-
-
   </ion-content>
+</ion-menu> -->
 
 
-</ion-menu>
-
-<ion-router-outlet id="main"></ion-router-outlet>

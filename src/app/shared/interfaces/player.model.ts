@@ -13,5 +13,6 @@ export class Player {
     speed?: number;
     stamina?: number;
     creativity?: number;
+    profilePicture?: string;
   }
 }

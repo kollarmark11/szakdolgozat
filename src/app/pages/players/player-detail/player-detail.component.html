@@ -10,6 +10,11 @@
 
 <ion-content *ngIf="playerData && !edit">
   <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-center ion-padding-top ion-margin-top">
+        <img [src]="playerData.data.profilePicture == '' ?  'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png' : playerData.data.profilePicture " class="profile-picture" />
+      </ion-col>
+    </ion-row>
     <ion-row class="main-data">
       <ion-col>
         <h1 class="name">{{ playerData.data.firstname }} {{ playerData.data.lastname }}</h1>

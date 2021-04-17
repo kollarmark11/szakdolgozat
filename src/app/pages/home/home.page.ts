@@ -30,16 +30,21 @@ export class HomePage implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.actualId = this.route.snapshot.paramMap.get('id');
-
     this.getEveryMatchData();
-  }
-
-  async ionViewDidEnter() {
     await this.getActualDoc();
     this.getData();
   }
+
+  doRefresh(event){
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
+
+
 
   async getData() {
     this.loading = await this.loadingCtrl.create();

@@ -1,6 +1,5 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>players</ion-title>
       <ion-buttons color="primary" slot="start">
         <ion-back-button color="light" defaultHref="/select-team"></ion-back-button>
       </ion-buttons>
@@ -29,6 +28,7 @@
         <ion-item-sliding *ngFor="let item of everyPlayer">
 
           <ion-item lines="none"  (click)="presentDetailModal(item.id)" >
+            <ion-img [src]="item.data.profilePicture == '' ?  'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png' : item.data.profilePicture " class="profile-picture"></ion-img>
             <ion-label>{{ item.data.firstname}} {{ item.data.lastname }} <span class="age">( {{ item.data.age }} )</span></ion-label>
           </ion-item>
 

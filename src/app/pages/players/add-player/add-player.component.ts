@@ -1,5 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { FirestoreService } from 'src/app/shared/firestore/firestore.service';
 
@@ -13,8 +19,15 @@ export class AddPlayerComponent implements OnInit {
 
   addPlayerForm: FormGroup;
   players = [];
+  imageUpload: AngularFireUploadTask;
+  pictureUrl = '';
 
-  constructor(private firestore: FirestoreService, private fb: FormBuilder, private modalCtrl: ModalController) { }
+  constructor(
+    private firestore: FirestoreService,
+    private fb: FormBuilder,
+    private modalCtrl: ModalController,
+    private storage: AngularFireStorage
+  ) {}
 
   ngOnInit() {
     this.addPlayerForm = this.fb.group({
@@ -29,20 +42,45 @@ export class AddPlayerComponent implements OnInit {
       speed: new FormControl(0),
       stamina: new FormControl(0),
       creativity: new FormControl(0),
-      note: new FormControl('', Validators.maxLength(200))
+      note: new FormControl('', Validators.maxLength(200)),
+      profilePicture: new FormControl('')
+    });
+  }
+
+  async uploadImg(event){
+    const file = event.target.files;
+    console.log(file)
+    var fileName = file[0]
+    console.log(fileName)
+
+    if(fileName.type.split('/')[0] !== "image"){
+      console.error("ERROR")
+      return;
+    }
+
+    const path = `${new Date().getTime()}_${fileName.name}`;
+
+    let fileRef = this.storage.ref(path);
+
+    this.imageUpload = this.storage.upload(path, fileName);
+
+    this.imageUpload.then(res => {
+      let imgFile  = res.task.snapshot.ref.getDownloadURL();
+      imgFile.then(downloadUrl => {
+        console.log(downloadUrl)
+        this.pictureUrl = downloadUrl;
+      })
     })
-
-
   }
 
-  addPlayer(){
-    console.log(this.addPlayerForm.value)
-    this.firestore.pushDocData(this.id, 'players', this.addPlayerForm.value)
-    this.modalCtrl.dismiss('success')
+  addPlayer() {
+    this.addPlayerForm.value.profilePicture = this.pictureUrl;
+    console.log(this.addPlayerForm.value);
+    this.firestore.pushDocData(this.id, 'players', this.addPlayerForm.value);
+    this.modalCtrl.dismiss('success');
   }
 
-  onCancel(){
-    this.modalCtrl.dismiss(null)
+  onCancel() {
+    this.modalCtrl.dismiss(null);
   }
-
 }

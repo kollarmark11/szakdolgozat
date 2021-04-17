@@ -10,6 +10,13 @@
 
   </div>
   <div class="container" [formGroup]="addPlayerForm">
+
+
+    <div class="container__input-div">
+      <ion-label>Kép:</ion-label>
+      <ion-input type="file" (change)="uploadImg($event)"></ion-input>
+    </div>
+
     <div class="container__input-div">
       <ion-label>Firstname:</ion-label>
       <ion-input formControlName="firstname"></ion-input>

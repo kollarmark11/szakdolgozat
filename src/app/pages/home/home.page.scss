@@ -7,27 +7,95 @@ ion-content{
   color: $light;
 }
 
+ion-toolbar{
+  --background: #22333B;
+}
+
 .home{
 
-  &__card{
+  &__title{
+    color: $light;
+    font-size: 25px;
+    text-align: center;
+    padding: 50px 0;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    text-align: center;
+  }
 
+  &__card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #1c292ebe;
+    border: 1px solid #ffffff;
+    color: $light;
+    padding: 0 30px;
+    margin: 10px 10px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: $primary-font;
+
+    p{
+      font-family: $primary-font;
+    }
+
+  }
+
+  &__result{
 
     &__div{
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+      border-radius: 5px;
+      color: $light;
+      font-size: 18px;
+      padding:10px 0;
+      margin: 20px 5px;
+
+      &.wins{
+        background-color: $primary;
+      }
+
+      &.loses{
+        background-color: #9A4D4D;
+      }
+
+      &.draws{
+        background-color: $tertiary;
+      }
+
+      p{
+        margin:0;
+        font-weight: 500;
+
+        &:first-child{
+          margin-bottom: 10px;
+
+        }
+      }
     }
   }
 }
 
-.sidemenu{
+.tab-bar{
+  border-top: 2px solid $light;
+  background-color: $primary;
 
-  ion-list{
-    padding:0;
-  }
+  ion-tab-button{
+    background-color: $primary;
+    font-weight: 500;
 
-  ion-item{
-    --background: #8F8073;
-    --padding-top:0;
+    ion-icon{
+      color: $light;
+    }
+
+    ion-label{
+      color: $light;
+
+      &.danger {
+        color: $danger;
+
+      }
+    }
   }
 }
