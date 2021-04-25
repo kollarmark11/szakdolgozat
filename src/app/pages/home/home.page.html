@@ -3,15 +3,15 @@
     <ion-title color="light">
       {{ actualTeam.name }}
     </ion-title>
-    <!-- <ion-menu-button color="light" slot="end"></ion-menu-button> -->
+    <ion-icon name="trash" slot="end" size="large" color="light" class="ion-padding-end" (click)="deleteTeam()"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <!-- <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.5" pullMin="100" pullMax="200">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.5" pullMin="100" pullMax="200">
     <ion-refresher-content></ion-refresher-content>
-  </ion-refresher> -->
+  </ion-refresher>
 
   <ion-grid>
     <ion-row>

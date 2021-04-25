@@ -2,37 +2,98 @@
   <ion-toolbar color="primary">
     <ion-icon name="arrow-back-outline" class="ion-padding-horizontal" size="large" color="light" slot="start" (click)="onCancel()"></ion-icon>
     <ion-buttons slot="end">
-      <ion-icon name="create-outline" size="large" color="light"></ion-icon>
+      <ion-icon name="create-outline" size="large" color="light" (click)="onEdit()"></ion-icon>
       <ion-icon name="trash-outline" class="ion-padding-horizontal" size="large" color="light" (click)="presentAlert()"></ion-icon>
     </ion-buttons>
 
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="matchData">
+<ion-content *ngIf="matchData && !edit">
   <ion-grid>
-    <ion-row class="main-data">
-      <ion-col>
-        <h1 class="name" style="display: block;">{{ matchData.data.midfielders }}</h1>
-        <h2 class="age">{{ matchData.data.date }} years old</h2>
-      </ion-col>
-    </ion-row>
+    <ion-card class="ion-text-center">
+      <ion-row>
+        <ion-col class="ion-text-right">
+          {{ matchData.data.yourGoals }}
+        </ion-col>
+        <ion-col>
+          -
+        </ion-col>
+        <ion-col class="ion-text-left">
+          {{ matchData.data.opponentGoals }}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col >
+          VS {{ matchData.data.opponent }}
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+    <ion-card class="ion-padding">
+      <ion-row>
+        <ion-col size="4">Goalkeeper:</ion-col>
+        <ion-col size="8" class="ion-text-right">{{ matchData.data.goalkeeper }}</ion-col>
+      </ion-row>
+      <hr class="line">
+      <ion-row>
+        <ion-col size="4">Right Backs:</ion-col>
+        <ion-col size="8" class="ion-text-right" >
+          <ion-text class="subposition" *ngFor="let item of matchData.data.rightBacks"> {{ item }}</ion-text>
+        </ion-col>
+      </ion-row>
+      <hr class="line">
+      <ion-row>
+        <ion-col size="4">Centre Backs:</ion-col>
+        <ion-col size="8" class="ion-text-right" >
+          <ion-text class="subposition" *ngFor="let item of matchData.data.centreBacks"> {{ item }}</ion-text>
+        </ion-col>
+      </ion-row>
+      <hr class="line">
+      <ion-row>
+        <ion-col size="4">Left Backs:</ion-col>
+        <ion-col size="8" class="ion-text-right" >
+          <ion-text class="subposition" *ngFor="let item of matchData.data.leftBacks"> {{ item }}</ion-text>
+        </ion-col>
+      </ion-row>
+      <hr class="line">
+      <ion-row>
+        <ion-col size="4">Midfielders:</ion-col>
+        <ion-col size="8" class="ion-text-right" >
+          <ion-text class="subposition" *ngFor="let item of matchData.data.midfielders"> {{ item }}</ion-text>
+        </ion-col>
+      </ion-row>
+      <hr class="line">
+      <ion-row>
+        <ion-col size="4">Right Wingers:</ion-col>
+        <ion-col size="8" class="ion-text-right" >
+          <ion-text class="subposition" *ngFor="let item of matchData.data.rightWingers"> {{ item }}</ion-text>
+        </ion-col>
+      </ion-row>
+      <hr class="line">
+      <ion-row>
+        <ion-col size="4">Left Wingers:</ion-col>
+        <ion-col size="8" class="ion-text-right" >
+          <ion-text class="subposition" *ngFor="let item of matchData.data.leftWingers"> {{ item }}</ion-text>
+        </ion-col>
+      </ion-row>
+      <hr class="line">
+      <ion-row>
+        <ion-col size="4">Strikers:</ion-col>
+        <ion-col size="8" class="ion-text-right" >
+          <ion-text class="subposition" *ngFor="let item of matchData.data.strikers"> {{ item }}</ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+
+  </ion-grid>
+</ion-content>
+
 
     <!-- <ion-row class="sub-data">
       <ion-col>
-        <ion-card class="ion-padding">
-          <ion-row>
-            <ion-col size="4">Main position:</ion-col>
-            <ion-col size="8" class="ion-text-right">{{ playerData.data.mainPosition | position }}</ion-col>
-          </ion-row>
-          <hr class="line">
-          <ion-row>
-            <ion-col size="4">Sub position:</ion-col>
-            <ion-col size="8" class="ion-text-right" >
-              <ion-text class="subposition" *ngFor="let item of playerData.data.subPosition"> {{ item | position}}</ion-text>
-            </ion-col>
-          </ion-row>
-        </ion-card>
+
 
         <ion-card class="ion-padding">
           <ion-row>
@@ -88,8 +149,85 @@
           </ion-row>
         </ion-card> -->
 
-  </ion-grid>
+<ion-content *ngIf="edit">
+
+
+  <div class="container" [formGroup]="addMatchForm">
+
+    <div class="container__input-div">
+      <ion-label>Match name:</ion-label>
+      <ion-input formControlName="name"></ion-input>
+    </div>
+
+    <div class="container__input-div">
+      <ion-label>Opponent:</ion-label>
+      <ion-input formControlName="opponent"></ion-input>
+    </div>
+
+    <div class="container__input-div">
+      <ion-label>Result:</ion-label>
+      <ion-input placeholder="Your team goals" class="ion-margin-bottom" formControlName="yourGoals" type="number"></ion-input>
+      <ion-input placeholder="Opponent team goals" formControlName="opponentGoals" type="number"></ion-input>
+    </div>
+
+    <div class="container__input-div">
+      <ion-label>Date:</ion-label>
+      <ion-datetime placeholder="2012-12-15T13:47:20.789" formControlName="date"></ion-datetime>
+    </div>
+
+    <div class="container__input-div">
+      <ion-label>Note:</ion-label>
+      <ion-textarea rows="7" formControlName="note"></ion-textarea>
+    </div>
+
+    <ion-label>Goalkeeper:</ion-label>
+    <ion-select formControlName="goalkeeper" >
+      <ion-select-option *ngFor="let player of everyPlayer" [value]="player.data.firstname +' '+ player.data.lastname" >{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
+    </ion-select>
+
+    <ion-label>Right Backs:</ion-label>
+    <ion-select formControlName="rightBacks" multiple="true">
+      <ion-select-option *ngFor="let player of everyPlayer" [value]="player.data.firstname +' '+ player.data.lastname" >{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
+    </ion-select>
+
+
+    <ion-label>Left Backs:</ion-label>
+    <ion-select formControlName="leftBacks" multiple="true">
+      <ion-select-option *ngFor="let player of everyPlayer" [value]="player.data.firstname +' '+ player.data.lastname" >{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
+    </ion-select>
+
+    <ion-label>Centre Backs:</ion-label>
+    <ion-select formControlName="centreBacks" multiple="true">
+      <ion-select-option *ngFor="let player of everyPlayer" [value]="player.data.firstname +' '+ player.data.lastname" >{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
+    </ion-select>
+
+    <ion-label>Midfielders:</ion-label>
+    <ion-select formControlName="midfielders" multiple="true">
+      <ion-select-option *ngFor="let player of everyPlayer"  [value]="player.data.firstname +' '+ player.data.lastname">{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
+    </ion-select>
+
+    <ion-label>Right midfielders/wingers:</ion-label>
+    <ion-select formControlName="rightWingers" multiple="true">
+      <ion-select-option *ngFor="let player of everyPlayer" [value]="player.data.firstname +' '+ player.data.lastname" >{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
+    </ion-select>
+
+    <ion-label>Left midfielders/wingers:</ion-label>
+    <ion-select formControlName="leftWingers" multiple="true">
+      <ion-select-option *ngFor="let player of everyPlayer" [value]="player.data.firstname +' '+ player.data.lastname" >{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
+    </ion-select>
+
+    <ion-label>Strikers:</ion-label>
+    <ion-select formControlName="strikers" multiple="true" class="my-custom-interface">
+      <ion-select-option style="color: red;" *ngFor="let player of everyPlayer" [value]="player.data.firstname +' '+ player.data.lastname" [ngClass]="player.data.isInjured ? 'red' : '' ">{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
+    </ion-select>
+
+    <ion-button (click)="editData()">Edit Match</ion-button>
+
+  </div>
+
 </ion-content>
+
+
 
 <ion-content *ngIf="!matchData">
   <ion-skeleton-text animated style="width: 100%; border-radius: 30px;" class="ion-margin-top ion-padding"></ion-skeleton-text>

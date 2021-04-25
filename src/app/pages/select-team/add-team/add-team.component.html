@@ -1,7 +1,10 @@
-<div class="container" [formGroup]="addTeamForm">
-  <div class="container__icon-div">
-    <ion-icon name="close-circle-outline" size="large" (click)="onCancel()"></ion-icon>
-  </div>
+<ion-header >
+  <ion-toolbar color="tertiary">
+    <ion-icon name="close-circle-outline" size="large" (click)="onCancel()" slot="end" class="ion-padding-horizontal"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [formGroup]="addTeamForm" color="tertiary" class="ion-padding-horizontal">
   <div class="container__input-div">
     <ion-label>Team name:</ion-label>
     <ion-input formControlName="name"></ion-input>
@@ -9,7 +12,7 @@
   <div>
     <ion-button color="light" expand="block" class="round__button" (click)="onSave()">+ Add Team</ion-button>
   </div>
-</div>
+</ion-content>
 
 
 

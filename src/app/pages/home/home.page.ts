@@ -27,7 +27,8 @@ export class HomePage implements OnInit {
     private route: ActivatedRoute,
     private dataBase: FirestoreService,
     private loadingCtrl: LoadingController,
-    private router: Router
+    private router: Router,
+    private firestore: AngularFirestore
   ) {}
 
   async ngOnInit() {
@@ -38,10 +39,9 @@ export class HomePage implements OnInit {
   }
 
   doRefresh(event){
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      event.target.complete();
-    }, 2000);
+    this.getEveryMatchData();
+    this.getData();
+    event.target.complete();
   }
 
 
@@ -69,6 +69,11 @@ export class HomePage implements OnInit {
   async getEveryMatchData() {
     await this.dataBase.getEveryMatch(this.actualId);
     this.everyMatch = this.dataBase.matches;
+  }
+
+  deleteTeam(){
+    this.firestore.collection('teams').doc(this.actualId).delete();
+    this.router.navigateByUrl('/select-team')
   }
 
   countOurGoals() {

@@ -21,10 +21,16 @@ export class SelectTeamPage implements OnInit {
     this.teams = this.firestore.teams;
   }
 
+  ionViewDidEnter(){
+    this.getEveryTeamData()
+    this.teams = this.firestore.teams;
+
+  }
+
   async presentAddTeamModal(){  // MODAL PRESENT
     this.addTeamModal = await this.modalCtrl.create({
       component: AddTeamComponent,
-      cssClass: 'my-custom-class'
+      cssClass: 'team-modal'
     });
     this.addTeamModal.onDidDismiss()  // HA bezárul a modal, az adatot megkapjuk és hozzáadjuk a teams tömbhöz
       .then((data) => {

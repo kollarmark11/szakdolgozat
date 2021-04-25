@@ -61,7 +61,7 @@ export class PlayersPage implements OnInit {
     });
     modal.onDidDismiss()
       .then((data) => {
-        if(data.data === 'delete'){
+        if(data.data === 'delete' || data.data === 'success'){
           this.firestore.getCollectionEveryData(this.actualId, 'players');
           this.everyPlayer = this.firestore.players;
         }

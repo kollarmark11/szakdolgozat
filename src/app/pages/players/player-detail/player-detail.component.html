@@ -97,8 +97,115 @@
   </ion-grid>
 </ion-content>
 
-<ion-content *ngIf="edit">
-  <p>asd</p>
+<ion-content *ngIf="edit" [formGroup]="addPlayerForm">
+  <div class="container__input-div">
+    <ion-label>Új Kép:</ion-label>
+    <ion-input type="file" (change)="uploadImg($event)"></ion-input>
+  </div>
+
+  <div class="container__input-div">
+    <ion-label>Firstname:</ion-label>
+    <ion-input formControlName="firstname"></ion-input>
+  </div>
+
+  <div class="container__input-div">
+    <ion-label>Lastname:</ion-label>
+    <ion-input formControlName="lastname"></ion-input>
+  </div>
+
+  <div class="container__input-div">
+    <ion-label>Age:</ion-label>
+    <ion-input formControlName="age" type="number"></ion-input>
+  </div>
+
+  <div class="container__input-div">
+    <ion-label>Height:</ion-label>
+    <ion-input formControlName="height" type="number"></ion-input>
+  </div>
+
+  <div class="container__input-div">
+    <ion-label>Weight:</ion-label>
+    <ion-input formControlName="weight" type="number"></ion-input>
+  </div>
+
+  <div class="container__input-div">
+    <ion-label>Main position:</ion-label>
+    <ion-select placeholder="Select One" formControlName="mainPosition" class="ion-no-padding">
+      <ion-select-option value="gk">Goalkeeper</ion-select-option>
+      <ion-select-option value="rb">Right Back</ion-select-option>
+      <ion-select-option value="cb">Centre Back</ion-select-option>
+      <ion-select-option value="lb">Left Back</ion-select-option>
+      <ion-select-option value="rwb">Right Wing Back</ion-select-option>
+      <ion-select-option value="lwb">Left Wing Back</ion-select-option>
+      <ion-select-option value="cdm">Centre Defensive Midfielder</ion-select-option>
+      <ion-select-option value="cm">Centre Midfielder</ion-select-option>
+      <ion-select-option value="cam">Centre Attacking Midfielder</ion-select-option>
+      <ion-select-option value="rm">Right Midfielder</ion-select-option>
+      <ion-select-option value="lm">Left Midfielder</ion-select-option>
+      <ion-select-option value="rw">Right Wing</ion-select-option>
+      <ion-select-option value="lw">Left Wing</ion-select-option>
+      <ion-select-option value="cf">Centre Forward</ion-select-option>
+      <ion-select-option value="st">Striker</ion-select-option>
+    </ion-select>
+  </div>
+
+  <div class="container__input-div">
+    <ion-label>Sub position:</ion-label>
+    <ion-select placeholder="Select One" multiple="true" formControlName="subPosition" class="ion-no-padding" interface="alert">
+      <ion-select-option value="gk">Goalkeeper</ion-select-option>
+      <ion-select-option value="rb">Right Back</ion-select-option>
+      <ion-select-option value="cb">Centre Back</ion-select-option>
+      <ion-select-option value="lb">Left Back</ion-select-option>
+      <ion-select-option value="rwb">Right Wing Back</ion-select-option>
+      <ion-select-option value="lwb">Left Wing Back</ion-select-option>
+      <ion-select-option value="cdm">Centre Defensive Midfielder</ion-select-option>
+      <ion-select-option value="cm">Centre Midfielder</ion-select-option>
+      <ion-select-option value="cam">Centre Attacking Midfielder</ion-select-option>
+      <ion-select-option value="rm">Right Midfielder</ion-select-option>
+      <ion-select-option value="lm">Left Midfielder</ion-select-option>
+      <ion-select-option value="rw">Right Wing</ion-select-option>
+      <ion-select-option value="lw">Left Wing</ion-select-option>
+      <ion-select-option value="cf">Centre Forward</ion-select-option>
+      <ion-select-option value="st">Striker</ion-select-option>
+    </ion-select>
+  </div>
+
+  <div class="container__toggle-div">
+    <ion-label>Injured:</ion-label>
+    <ion-toggle formControlName="isInjured" color="secondary"></ion-toggle>
+  </div>
+
+  <div class="container__input-div">
+    <ion-label>Speed:</ion-label>
+    <ion-range min="0" max="10" color="light" step="1" snaps="true" size="large" pin="true" formControlName="speed" class="range-item">
+      <ion-label slot="start">0</ion-label>
+      <ion-label slot="end">10</ion-label>
+    </ion-range>
+
+  </div>
+
+  <div class="container__input-div">
+    <ion-label>Stamina:</ion-label>
+    <ion-range min="0" max="10" color="light" step="1" snaps="true" size="large" pin="true" formControlName="stamina" class="range-item">
+      <ion-label slot="start">0</ion-label>
+      <ion-label slot="end">10</ion-label>
+    </ion-range>
+  </div>
+
+  <div class="container__input-div">
+    <ion-label>Creativity:</ion-label>
+    <ion-range min="0" max="10" color="light" step="1" snaps="true" size="large" pin="true" formControlName="creativity" class="range-item">
+      <ion-label slot="start">0</ion-label>
+      <ion-label slot="end">10</ion-label>
+    </ion-range>
+  </div>
+
+  <div class="container__input-div">
+    <ion-label>Note:</ion-label>
+    <ion-textarea formControlName="note" rows="7"></ion-textarea>
+  </div>
+
+  <ion-button (click)="updateData()" expand="block" class="ion-margin-bottom">Edit Player</ion-button>
 </ion-content>
 
 <ion-content *ngIf="!playerData">

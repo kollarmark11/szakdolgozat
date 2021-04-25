@@ -67,6 +67,13 @@ ion-input, ion-textarea{
   background-color: $tertiary !important;
 }
 
+.team-modal .modal-wrapper{
+  max-height: 40vh;
+  width: 85%;
+  --border-radius: 10px;
+  background-color: $tertiary;
+}
+
 .alert-wrapper{
   min-width: 90% !important;
 }
