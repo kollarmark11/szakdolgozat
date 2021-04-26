@@ -4,4 +4,5 @@ export class Team {
   number: number;
   newarr?: any;
   data?: any;
+  uid: any;
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Match } from '../interfaces/match.model';
 import { Player } from '../interfaces/player.model';
 import { Team } from '../interfaces/team.model';
@@ -14,20 +15,24 @@ export class FirestoreService {
   docData: any;
   matches: Match[] = [];
 
-  constructor(private firestore: AngularFirestore) {
+  constructor(private firestore: AngularFirestore, private auth: AuthService) {
+
     this.getEveryData();
    }
 
 
-  getEveryData(){
+  async getEveryData(){
+    this.auth.uid = '';
+    await this.auth.currentUid()
     this.teams = []
-    this.firestore.collection("teams").get().toPromise().then((querySnapshot) => {
+    await this.firestore.collection("teams").get().toPromise().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         let data = new Team();
         data.id = doc.id;
         data.data = doc.data()
-        this.teams.push(data)
-          // doc.data() is never undefined for query doc snapshots
+        if(data.data.uid === this.auth.uid){
+          this.teams.push(data)
+        }
 
       });
   });

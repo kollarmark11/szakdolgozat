@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { AuthService } from 'src/app/auth/auth.service';
 import { FirestoreService } from 'src/app/shared/firestore/firestore.service';
 
 @Component({
@@ -11,14 +13,26 @@ import { FirestoreService } from 'src/app/shared/firestore/firestore.service';
 export class AddTeamComponent implements OnInit {
 
   addTeamForm: FormGroup;
+  uid: any;
 
 
-  constructor(private modalCtrl: ModalController, private fb: FormBuilder, private firestore: FirestoreService) { }
+  constructor(private modalCtrl: ModalController, private fb: FormBuilder, private firestore: FirestoreService, private auth: AuthService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.auth.currentUid();
+    console.log(this.auth.uid)
+
     this.addTeamForm = this.fb.group({
-      name: new FormControl('', Validators.required)
+      name: new FormControl('', Validators.required),
+      uid: ''
     })
+
+    console.log(this.addTeamForm)
+
+  }
+
+  ionViewDidEnter(){
+
   }
 
   onCancel(){
@@ -26,6 +40,7 @@ export class AddTeamComponent implements OnInit {
   }
 
   onSave(){
+    this.addTeamForm.value.uid = this.auth.uid;
     if(this.addTeamForm.invalid) {
 
     } else {

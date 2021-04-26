@@ -21,9 +21,9 @@ export class SelectTeamPage implements OnInit {
     this.teams = this.firestore.teams;
   }
 
-  ionViewDidEnter(){
-    this.getEveryTeamData()
-    this.teams = this.firestore.teams;
+  async ionViewWillEnter(){
+    await this.getEveryTeamData();
+    this.teams = this.firestore.teams
 
   }
 
@@ -36,7 +36,6 @@ export class SelectTeamPage implements OnInit {
       .then((data) => {
         if(data.data != null) { // kihozott adatot vizsgáljuk, ha null az érték, akkor marad minden
           this.getEveryTeamData()
-          console.log(this.teams)
           this.teams = this.firestore.teams;
         } else {
         }
@@ -54,7 +53,7 @@ export class SelectTeamPage implements OnInit {
   }
 
   selectTeam(item){
-    console.log(item.id)
+
   }
 
 

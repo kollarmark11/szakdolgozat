@@ -29,8 +29,9 @@ export class LoginPage implements OnInit {
   }
 
   async onLogin(){
-    await this.authService.standardLogin(this.loginForm.value.email, this.loginForm.value.password);
-
+    if(this.loginForm.valid){
+      await this.authService.standardLogin(this.loginForm.value.email, this.loginForm.value.password);
+    }
     this.errorMessage = this.authService.errorMessage;
   }
 

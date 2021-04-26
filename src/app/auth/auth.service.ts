@@ -11,6 +11,7 @@ export class AuthService {
 
   errorMessage: string;
   email: string;
+  uid: any;
 
   constructor(private auth: AngularFireAuth, private router: Router, private toast: ToastService) { }
 
@@ -55,6 +56,12 @@ export class AuthService {
           }
         }, reject)
       })
+  }
+
+  async currentUid(){
+    await this.auth.user.subscribe(user => {
+      this.uid = user.uid
+    })
   }
 
 }
