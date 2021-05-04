@@ -40,14 +40,12 @@ export class AddTeamComponent implements OnInit {
   }
 
   onSave(){
-    this.addTeamForm.value.uid = this.auth.uid;
+    this.addTeamForm.value.uid = localStorage.getItem('uid');
     if(this.addTeamForm.invalid) {
 
     } else {
       this.firestore.pushNewData(this.addTeamForm.value); // firestore hozzáadás
       this.modalCtrl.dismiss(this.addTeamForm.value) // ezt az adatot visszük ki a modal-ból
     }
-
   }
-
 }

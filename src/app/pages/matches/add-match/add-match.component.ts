@@ -13,6 +13,7 @@ export class AddMatchComponent implements OnInit {
   everyPlayer: any;
   id: any;
   defense: any;
+  currentDate = new Date();
 
   addMatchForm: FormGroup;
 
@@ -81,7 +82,7 @@ export class AddMatchComponent implements OnInit {
       this.addMatchForm.value.strikers.length)
       console.log(number)
 
-      if(number === 11 && this.addMatchForm.valid){
+      if((number === 11 || number === 0) && this.addMatchForm.valid){
         this.firestore.pushDocData(this.id, 'matches', this.addMatchForm.value)
         this.modalCtrl.dismiss('success')
         this.toast.presentToast('Successfully match adding!', 'success')

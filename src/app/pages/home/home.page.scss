@@ -84,6 +84,7 @@ ion-toolbar{
   ion-tab-button{
     background-color: $primary;
     font-weight: 500;
+    font-size: 10px;
 
     ion-icon{
       color: $light;
@@ -96,6 +97,14 @@ ion-toolbar{
         color: $danger;
 
       }
+    }
+  }
+}
+
+@media screen and (min-width: 780px) {
+  .tab-bar{
+    ion-tab-button{
+      font-size: 14px !important;
     }
   }
 }

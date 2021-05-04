@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { FirestoreService } from 'src/app/shared/firestore/firestore.service';
+import { LoaderService } from 'src/app/shared/loader/loader.service';
 import { AddPlayerComponent } from './add-player/add-player.component';
 import { PlayerDetailComponent } from './player-detail/player-detail.component';
 
@@ -16,7 +17,7 @@ export class PlayersPage implements OnInit {
   addPlayerModal: any;
   everyPlayer: any;
 
-  constructor(private route: ActivatedRoute, private modalCtrl: ModalController, private firestore: FirestoreService) { }
+  constructor(private route: ActivatedRoute, private modalCtrl: ModalController, private firestore: FirestoreService, private loader: LoaderService) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -69,8 +70,10 @@ export class PlayersPage implements OnInit {
     return await modal.present();
   }
 
-  deletePlayer(playerId){
-    this.firestore.deleteSubDoc(this.actualId, 'players', playerId)
+  async deletePlayer(playerId){
+    await this.firestore.deleteSubDoc(this.actualId, 'players', playerId)
+    this.everyPlayer = [];
+    this.firestore.players = [];
     this.firestore.getCollectionEveryData(this.actualId, 'players');
     this.everyPlayer = this.firestore.players;
 

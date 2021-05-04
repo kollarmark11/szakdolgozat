@@ -18,7 +18,7 @@
     <ion-row class="main-data">
       <ion-col>
         <h1 class="name">{{ playerData.data.firstname }} {{ playerData.data.lastname }}</h1>
-        <h2 class="age">{{ playerData.data.age }} years old</h2>
+        <h2 class="age">{{ playerData.data.age }} éves</h2>
       </ion-col>
     </ion-row>
 
@@ -26,12 +26,12 @@
       <ion-col>
         <ion-card class="ion-padding">
           <ion-row>
-            <ion-col size="4">Main position:</ion-col>
+            <ion-col size="4">Fő pozíció:</ion-col>
             <ion-col size="8" class="ion-text-right">{{ playerData.data.mainPosition | position }}</ion-col>
           </ion-row>
           <hr class="line">
           <ion-row>
-            <ion-col size="4">Sub position:</ion-col>
+            <ion-col size="4">Mellék pozíció:</ion-col>
             <ion-col size="8" class="ion-text-right" >
               <ion-text class="subposition" *ngFor="let item of playerData.data.subPosition"> {{ item | position}}</ion-text>
             </ion-col>
@@ -40,18 +40,18 @@
 
         <ion-card class="ion-padding">
           <ion-row>
-            <ion-col>Injured:</ion-col>
+            <ion-col>Sérült:</ion-col>
             <ion-col class="ion-text-right">{{ playerData.data.isInjured | injured}}</ion-col>
           </ion-row>
         </ion-card>
 
         <ion-card class="ion-padding">
           <ion-row>
-            <ion-col>Height:</ion-col>
+            <ion-col>Magasság:</ion-col>
             <ion-col class="ion-text-right">{{ playerData.data.height }} cm</ion-col>
           </ion-row>
           <ion-row>
-            <ion-col>Weight:</ion-col>
+            <ion-col>Súly:</ion-col>
             <ion-col class="ion-text-right">{{ playerData.data.weight }} kg</ion-col>
           </ion-row>
         </ion-card>
@@ -59,7 +59,7 @@
         <ion-card class="ion-padding">
           <ion-row>
             <ion-col>
-              <ion-text class="ion-margin-bottom">Speed: {{ playerData.data.speed }}/10</ion-text>
+              <ion-text class="ion-margin-bottom">Gyorsaság: {{ playerData.data.speed }}/10</ion-text>
               <ion-progress-bar class="ion-margin-top progress-bar" [value]="playerData.data.speed/10"></ion-progress-bar>
             </ion-col>
           </ion-row>
@@ -68,7 +68,7 @@
         <ion-card class="ion-padding">
           <ion-row>
             <ion-col>
-              <ion-text class="ion-margin-bottom">Creativity: {{ playerData.data.creativity }}/10</ion-text>
+              <ion-text class="ion-margin-bottom">Kreativitás: {{ playerData.data.creativity }}/10</ion-text>
               <ion-progress-bar class="ion-margin-top progress-bar" [value]="playerData.data.creativity/10"></ion-progress-bar>
             </ion-col>
           </ion-row>
@@ -77,7 +77,7 @@
         <ion-card class="ion-padding">
           <ion-row>
             <ion-col>
-              <ion-text class="ion-margin-bottom">Stamina: {{ playerData.data.stamina }}/10</ion-text>
+              <ion-text class="ion-margin-bottom">Állóképesség: {{ playerData.data.stamina }}/10</ion-text>
               <ion-progress-bar class="ion-margin-top progress-bar" [value]="playerData.data.stamina/10"></ion-progress-bar>
             </ion-col>
           </ion-row>
@@ -86,7 +86,7 @@
         <ion-card class="ion-padding">
           <ion-row>
             <ion-col>
-              <ion-text class="ion-margin-bottom">Note:</ion-text>
+              <ion-text class="ion-margin-bottom">Jegyzet:</ion-text>
               <ion-text color="primary note">{{ playerData.data.note }}</ion-text>
             </ion-col>
           </ion-row>
@@ -104,79 +104,79 @@
   </div>
 
   <div class="container__input-div">
-    <ion-label>Firstname:</ion-label>
+    <ion-label>Keresztnév:</ion-label>
     <ion-input formControlName="firstname"></ion-input>
   </div>
 
   <div class="container__input-div">
-    <ion-label>Lastname:</ion-label>
+    <ion-label>Vezetéknév:</ion-label>
     <ion-input formControlName="lastname"></ion-input>
   </div>
 
   <div class="container__input-div">
-    <ion-label>Age:</ion-label>
+    <ion-label>Kor:</ion-label>
     <ion-input formControlName="age" type="number"></ion-input>
   </div>
 
   <div class="container__input-div">
-    <ion-label>Height:</ion-label>
+    <ion-label>Magasság:</ion-label>
     <ion-input formControlName="height" type="number"></ion-input>
   </div>
 
   <div class="container__input-div">
-    <ion-label>Weight:</ion-label>
+    <ion-label>Súly:</ion-label>
     <ion-input formControlName="weight" type="number"></ion-input>
   </div>
 
   <div class="container__input-div">
-    <ion-label>Main position:</ion-label>
+    <ion-label>Fő pozíció:</ion-label>
     <ion-select placeholder="Select One" formControlName="mainPosition" class="ion-no-padding">
-      <ion-select-option value="gk">Goalkeeper</ion-select-option>
-      <ion-select-option value="rb">Right Back</ion-select-option>
-      <ion-select-option value="cb">Centre Back</ion-select-option>
-      <ion-select-option value="lb">Left Back</ion-select-option>
-      <ion-select-option value="rwb">Right Wing Back</ion-select-option>
-      <ion-select-option value="lwb">Left Wing Back</ion-select-option>
-      <ion-select-option value="cdm">Centre Defensive Midfielder</ion-select-option>
-      <ion-select-option value="cm">Centre Midfielder</ion-select-option>
-      <ion-select-option value="cam">Centre Attacking Midfielder</ion-select-option>
-      <ion-select-option value="rm">Right Midfielder</ion-select-option>
-      <ion-select-option value="lm">Left Midfielder</ion-select-option>
-      <ion-select-option value="rw">Right Wing</ion-select-option>
-      <ion-select-option value="lw">Left Wing</ion-select-option>
-      <ion-select-option value="cf">Centre Forward</ion-select-option>
-      <ion-select-option value="st">Striker</ion-select-option>
+      <ion-select-option value="gk">Kapus</ion-select-option>
+        <ion-select-option value="rb">Jobb védő</ion-select-option>
+        <ion-select-option value="cb">Középső védő</ion-select-option>
+        <ion-select-option value="lb">Bal védő</ion-select-option>
+        <ion-select-option value="rwb">Jobb szélső védő</ion-select-option>
+        <ion-select-option value="lwb">Bal szélső védő</ion-select-option>
+        <ion-select-option value="cdm">Védekező középpályás</ion-select-option>
+        <ion-select-option value="cm">Középső középpályás</ion-select-option>
+        <ion-select-option value="cam">Támadó középpályás</ion-select-option>
+        <ion-select-option value="rm">Jobb oldali középpályás</ion-select-option>
+        <ion-select-option value="lm">Bal oldali középpályás</ion-select-option>
+        <ion-select-option value="rw">Jobb szélső támadó</ion-select-option>
+        <ion-select-option value="lw">Bal szélső támadó</ion-select-option>
+        <ion-select-option value="cf">Középső csatár</ion-select-option>
+        <ion-select-option value="st">Csatár</ion-select-option>
     </ion-select>
   </div>
 
   <div class="container__input-div">
-    <ion-label>Sub position:</ion-label>
+    <ion-label>Mellék pozíció:</ion-label>
     <ion-select placeholder="Select One" multiple="true" formControlName="subPosition" class="ion-no-padding" interface="alert">
-      <ion-select-option value="gk">Goalkeeper</ion-select-option>
-      <ion-select-option value="rb">Right Back</ion-select-option>
-      <ion-select-option value="cb">Centre Back</ion-select-option>
-      <ion-select-option value="lb">Left Back</ion-select-option>
-      <ion-select-option value="rwb">Right Wing Back</ion-select-option>
-      <ion-select-option value="lwb">Left Wing Back</ion-select-option>
-      <ion-select-option value="cdm">Centre Defensive Midfielder</ion-select-option>
-      <ion-select-option value="cm">Centre Midfielder</ion-select-option>
-      <ion-select-option value="cam">Centre Attacking Midfielder</ion-select-option>
-      <ion-select-option value="rm">Right Midfielder</ion-select-option>
-      <ion-select-option value="lm">Left Midfielder</ion-select-option>
-      <ion-select-option value="rw">Right Wing</ion-select-option>
-      <ion-select-option value="lw">Left Wing</ion-select-option>
-      <ion-select-option value="cf">Centre Forward</ion-select-option>
-      <ion-select-option value="st">Striker</ion-select-option>
+      <ion-select-option value="gk">Kapus</ion-select-option>
+        <ion-select-option value="rb">Jobb védő</ion-select-option>
+        <ion-select-option value="cb">Középső védő</ion-select-option>
+        <ion-select-option value="lb">Bal védő</ion-select-option>
+        <ion-select-option value="rwb">Jobb szélső védő</ion-select-option>
+        <ion-select-option value="lwb">Bal szélső védő</ion-select-option>
+        <ion-select-option value="cdm">Védekező középpályás</ion-select-option>
+        <ion-select-option value="cm">Középső középpályás</ion-select-option>
+        <ion-select-option value="cam">Támadó középpályás</ion-select-option>
+        <ion-select-option value="rm">Jobb oldali középpályás</ion-select-option>
+        <ion-select-option value="lm">Bal oldali középpályás</ion-select-option>
+        <ion-select-option value="rw">Jobb szélső támadó</ion-select-option>
+        <ion-select-option value="lw">Bal szélső támadó</ion-select-option>
+        <ion-select-option value="cf">Középső csatár</ion-select-option>
+        <ion-select-option value="st">Csatár</ion-select-option>
     </ion-select>
   </div>
 
   <div class="container__toggle-div">
-    <ion-label>Injured:</ion-label>
+    <ion-label>Sérülés:</ion-label>
     <ion-toggle formControlName="isInjured" color="secondary"></ion-toggle>
   </div>
 
   <div class="container__input-div">
-    <ion-label>Speed:</ion-label>
+    <ion-label>Gyorsaság:</ion-label>
     <ion-range min="0" max="10" color="light" step="1" snaps="true" size="large" pin="true" formControlName="speed" class="range-item">
       <ion-label slot="start">0</ion-label>
       <ion-label slot="end">10</ion-label>
@@ -185,7 +185,7 @@
   </div>
 
   <div class="container__input-div">
-    <ion-label>Stamina:</ion-label>
+    <ion-label>Állóképesség:</ion-label>
     <ion-range min="0" max="10" color="light" step="1" snaps="true" size="large" pin="true" formControlName="stamina" class="range-item">
       <ion-label slot="start">0</ion-label>
       <ion-label slot="end">10</ion-label>
@@ -193,7 +193,7 @@
   </div>
 
   <div class="container__input-div">
-    <ion-label>Creativity:</ion-label>
+    <ion-label>Kreativitás:</ion-label>
     <ion-range min="0" max="10" color="light" step="1" snaps="true" size="large" pin="true" formControlName="creativity" class="range-item">
       <ion-label slot="start">0</ion-label>
       <ion-label slot="end">10</ion-label>
@@ -201,11 +201,11 @@
   </div>
 
   <div class="container__input-div">
-    <ion-label>Note:</ion-label>
+    <ion-label>Jegyzet:</ion-label>
     <ion-textarea formControlName="note" rows="7"></ion-textarea>
   </div>
 
-  <ion-button (click)="updateData()" expand="block" class="ion-margin-bottom">Edit Player</ion-button>
+  <ion-button (click)="updateData()" expand="block" class="ion-margin-bottom">Játékos szerkesztés</ion-button>
 </ion-content>
 
 <ion-content *ngIf="!playerData">

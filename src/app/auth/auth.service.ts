@@ -15,8 +15,8 @@ export class AuthService {
 
   constructor(private auth: AngularFireAuth, private router: Router, private toast: ToastService) { }
 
-  standardLogin(email, password){  // BELÉPÉS FIREBASE AUTHON KERESZTÜL
-    this.auth
+  async standardLogin(email, password){  // BELÉPÉS FIREBASE AUTHON KERESZTÜL
+    await this.auth
       .signInWithEmailAndPassword(email, password)
       .then(() => {  // SIKERES
         this.toast.presentToast('Successfull Login!', 'success');
@@ -25,13 +25,16 @@ export class AuthService {
       .catch((error) => { //ERROR
         this.toast.presentToast(error.message, 'danger');
       })
+      await this.currentUid();
+
+
   }
 
   register(email, password){ //REGISZTRACIO
     this.auth
       .createUserWithEmailAndPassword(email, password)
       .then(() => {  //SIKERES
-        this.toast.presentToast('Successfull Register!', 'success');
+        this.toast.presentToast('Sikeres bejelentkezés!', 'success');
         this.router.navigateByUrl('login')
       })
       .catch((error) => { // ERROR
@@ -40,6 +43,7 @@ export class AuthService {
   }
 
   logout(){  // KILÉPÉS
+    localStorage.removeItem('uid');
     this.auth.signOut()
       .then(() => {
         this.router.navigateByUrl('login') // LOGIN PAGERE NAVIGALAS
@@ -60,8 +64,8 @@ export class AuthService {
 
   async currentUid(){
     await this.auth.user.subscribe(user => {
-      this.uid = user.uid
+      this.uid = user.uid;
+      localStorage.setItem('uid', JSON.stringify(user.uid))
     })
   }
-
 }

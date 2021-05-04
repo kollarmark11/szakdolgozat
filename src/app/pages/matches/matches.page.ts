@@ -22,14 +22,13 @@ export class MatchesPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.actualId = params.id;
     })
-
+    this.firestore.getCollectionEveryData(this.actualId, 'players');
+    this.everyMatch = this.firestore.matches;
 
   }
 
   ionViewDidEnter(){
-    this.getdata()
-
-
+    this.getdata();
   }
 
   async getdata(){
@@ -46,14 +45,13 @@ export class MatchesPage implements OnInit {
         id: this.actualId
       }
     });
-    /* this.addMatchModal.onDidDismiss()  // HA bezárul a modal, az adatot megkapjuk és hozzáadjuk a teams tömbhöz
+    this.addMatchModal.onDidDismiss()  // HA bezárul a modal, az adatot megkapjuk és hozzáadjuk a teams tömbhöz
       .then((data) => {
         if(data.data != null) {
-          this.firestore.getCollectionEveryData(this.actualId, 'players');
-          this.everyPlayer = this.firestore.players;
-        } else {
+          this.firestore.getEveryMatch(this.actualId);
+          this.everyMatch = this.firestore.matches;
         }
-      }) */
+      })
     return await this.addMatchModal.present();
   }
 

@@ -16,17 +16,5 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.getEmail();
-
   }
-
-  getEmail(){
-    this.auth.currentEmail().then((user) => {
-        this.email = user;
-    })
-    .catch(() => {
-      this.email = ''
-    });
-  }
-
 }

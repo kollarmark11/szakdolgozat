@@ -44,8 +44,6 @@ export class HomePage implements OnInit {
     event.target.complete();
   }
 
-
-
   async getData() {
     this.loading = await this.loadingCtrl.create();
     await this.loading.present();
@@ -114,5 +112,9 @@ export class HomePage implements OnInit {
         this.draw++;
       }
     }
+  }
+
+  logout(){
+    localStorage.removeItem('uid');
   }
 }

@@ -16,24 +16,20 @@ export class FirestoreService {
   matches: Match[] = [];
 
   constructor(private firestore: AngularFirestore, private auth: AuthService) {
-
-    this.getEveryData();
    }
 
 
   async getEveryData(){
     this.auth.uid = '';
-    await this.auth.currentUid()
-    this.teams = []
+    await this.auth.currentUid();
     await this.firestore.collection("teams").get().toPromise().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         let data = new Team();
         data.id = doc.id;
         data.data = doc.data()
         if(data.data.uid === this.auth.uid){
-          this.teams.push(data)
+          this.teams.push(data);
         }
-
       });
   });
   }
@@ -56,24 +52,6 @@ export class FirestoreService {
   pushDocData(id, secondCollection ,obj){
     this.firestore.collection("teams").doc(id).collection(secondCollection).add(obj)
 
-   /*  this.getOneDocData(id).then(() => {
-      console.log(this.docData.players)
-      if(!this.docData.players){
-        this.firestore.collection('teams').doc(id).update({
-          'players': JSON.stringify(obj)
-        })
-      } else {
-        this.players.push(obj)
-        this.docData = JSON.parse(this.docData.players)
-        this.players.push(this.docData.players)
-        console.log(this.players)
-        this.docData.players = JSON.stringify(this.players);
-        this.firestore.collection('teams').doc(id).update({
-          'players': this.docData.players
-        })
-        console.log(JSON.parse(this.docData.players))
-      }
-    }); */
   }
 
   getCollectionEveryData(id, collection){ // COLLECTIONON BELÜLI COLLECTION(mint az array). kiszedjük belőle a dolgokat. az elején reseteljük a tömböt

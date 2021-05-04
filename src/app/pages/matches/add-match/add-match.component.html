@@ -1,94 +1,86 @@
 <ion-header>
   <ion-toolbar color="tertiary">
     <ion-icon name="close-circle-outline" size="large" slot="end" (click)="onCancel()"></ion-icon>
-    <ion-title>Add Match</ion-title>
+    <ion-title>Mérkőzés hozzáadás</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="tertiary" [formGroup]="addMatchForm">
-  <div class="icon-div">
-
-  </div>
   <div class="container">
 
     <div class="container__input-div">
-      <ion-label>Match name:</ion-label>
+      <ion-label>Mérkőzés elnevezése:</ion-label>
       <ion-input formControlName="name"></ion-input>
+      <ion-text color="warning" *ngIf="addMatchForm.get('name').touched && addMatchForm.get('name').hasError('required')">Kötelező mező!</ion-text>
     </div>
 
     <div class="container__input-div">
-      <ion-label>Opponent:</ion-label>
+      <ion-label>Ellenfél:</ion-label>
       <ion-input formControlName="opponent"></ion-input>
+      <ion-text color="warning" *ngIf="addMatchForm.get('opponent').touched && addMatchForm.get('opponent').hasError('required')">Kötelező mező!</ion-text>
+
     </div>
 
     <div class="container__input-div">
-      <ion-label>Result:</ion-label>
-      <ion-input placeholder="Your team goals" class="ion-margin-bottom" formControlName="yourGoals" type="number"></ion-input>
-      <ion-input placeholder="Opponent team goals" formControlName="opponentGoals" type="number"></ion-input>
+      <ion-label>Végeredmény:</ion-label>
+      <ion-input placeholder="Csapatod góljai" class="ion-margin-bottom" formControlName="yourGoals" type="number"></ion-input>
+      <ion-input placeholder="Ellenfél csapat góljai" formControlName="opponentGoals" type="number"></ion-input>
     </div>
 
     <div class="container__input-div">
-      <ion-label>Date:</ion-label>
-      <ion-datetime placeholder="2012-12-15T13:47:20.789" formControlName="date"></ion-datetime>
+      <ion-label>Dátum:</ion-label>
+      <ion-datetime [placeholder]="currentDate" displayFormat="YYYY. MM. DD." formControlName="date"></ion-datetime>
+      <ion-text color="warning" *ngIf="addMatchForm.get('date').touched && addMatchForm.get('date').hasError('required')">Kötelező mező!</ion-text>
     </div>
 
     <div class="container__input-div">
-      <ion-label>Note:</ion-label>
+      <ion-label>Jegyzet:</ion-label>
       <ion-textarea rows="7" formControlName="note"></ion-textarea>
     </div>
 
-    <ion-label>Goalkeeper:</ion-label>
+    <ion-label>Kapus:</ion-label>
     <ion-select formControlName="goalkeeper">
       <ion-select-option *ngFor="let player of everyPlayer" [value]="player.data.firstname +' '+ player.data.lastname" >{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
     </ion-select>
 
-    <ion-label>Right Backs:</ion-label>
+    <ion-label>Jobb védők:</ion-label>
     <ion-select formControlName="rightBacks" multiple="true">
-      <ion-select-option *ngFor="let player of rightBacksArray" [value]="player.data.firstname +' '+ player.data.lastname" >{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
+      <ion-select-option *ngFor="let player of everyPlayer" [value]="player.data.firstname +' '+ player.data.lastname" >{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
     </ion-select>
 
 
-    <ion-label>Left Backs:</ion-label>
+    <ion-label>Bal védők:</ion-label>
     <ion-select formControlName="leftBacks" multiple="true">
-      <ion-select-option *ngFor="let player of leftBacksArray" [value]="player.data.firstname +' '+ player.data.lastname" >{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
+      <ion-select-option *ngFor="let player of everyPlayer" [value]="player.data.firstname +' '+ player.data.lastname" >{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
     </ion-select>
 
-    <ion-label>Centre Backs:</ion-label>
+    <ion-label>Középső védők:</ion-label>
     <ion-select formControlName="centreBacks" multiple="true">
-      <ion-select-option *ngFor="let player of centreBacksArray" [value]="player.data.firstname +' '+ player.data.lastname" >{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
+      <ion-select-option *ngFor="let player of everyPlayer" [value]="player.data.firstname +' '+ player.data.lastname" >{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
     </ion-select>
 
-    <ion-label>Midfielders:</ion-label>
+    <ion-label>Középpályások:</ion-label>
     <ion-select formControlName="midfielders" multiple="true">
-      <ion-select-option *ngFor="let player of midfieldersArray"  [value]="player.data.firstname +' '+ player.data.lastname">{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
+      <ion-select-option *ngFor="let player of everyPlayer"  [value]="player.data.firstname +' '+ player.data.lastname">{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
     </ion-select>
 
-    <ion-label>Right midfielders/wingers:</ion-label>
+    <ion-label>Jobb középpályások/szélsők:</ion-label>
     <ion-select formControlName="rightWingers" multiple="true">
-      <ion-select-option *ngFor="let player of rightWingersArray" [value]="player.data.firstname +' '+ player.data.lastname" >{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
+      <ion-select-option *ngFor="let player of everyPlayer" [value]="player.data.firstname +' '+ player.data.lastname" >{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
     </ion-select>
 
-    <ion-label>Left midfielders/wingers:</ion-label>
+    <ion-label>Bal középpályások/szélsők:</ion-label>
     <ion-select formControlName="leftWingers" multiple="true">
-      <ion-select-option *ngFor="let player of leftWingersArray" [value]="player.data.firstname +' '+ player.data.lastname" >{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
+      <ion-select-option *ngFor="let player of everyPlayer" [value]="player.data.firstname +' '+ player.data.lastname" >{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
     </ion-select>
 
-    <ion-label>Strikers:</ion-label>
+    <ion-label>Csatárok:</ion-label>
     <ion-select formControlName="strikers" multiple="true" class="my-custom-interface">
-      <ion-select-option style="color: red;" *ngFor="let player of strikersArray" [value]="player.data.firstname +' '+ player.data.lastname" [ngClass]="player.data.isInjured ? 'red' : '' ">{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
+      <ion-select-option  *ngFor="let player of everyPlayer" [value]="player.data.firstname +' '+ player.data.lastname">{{ player.data.mainPosition | uppercase}} - {{ player.data.firstname }} {{player.data.lastname}}</ion-select-option>
     </ion-select>
-
-
-
-
-
-
-
-
-
 
     <div class="container__button-div">
-      <ion-button color="light" expand="block" class="round__button" (click)="addMatch()">+ Add Player</ion-button>
+      <ion-button color="light" expand="block" class="round__button" (click)="addMatch()">+ Mérkőzés hozzáadás</ion-button>
     </div>
   </div>
 
