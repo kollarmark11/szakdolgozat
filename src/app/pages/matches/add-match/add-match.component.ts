@@ -72,16 +72,18 @@ export class AddMatchComponent implements OnInit {
       this.addMatchForm.value.midfielders.length +
       this.addMatchForm.value.rightWingers.length +
       this.addMatchForm.value.leftWingers.length +
-      this.addMatchForm.value.strikers.length)
+      this.addMatchForm.value.strikers.length +
+      1)
+      console.log(number)
 
-      if((number === 11 || number === 0) && this.addMatchForm.valid){
+      if((number === 12 || number === 0) && this.addMatchForm.valid){
         this.firestore.pushDocData(this.id, 'matches', this.addMatchForm.value)
         this.modalCtrl.dismiss('success')
-        this.toast.presentToast('Successfully match adding!', 'success')
+        this.toast.presentToast('Sikeres mérkőzés hozzáadás!', 'success')
       }else if(this.addMatchForm.invalid){
-        this.toast.presentToast('Please fill every field!', 'danger')
+        this.toast.presentToast('Minden mező kitöltése kötelező!', 'danger')
       }else if(number != 11) {
-        this.toast.presentToast('Please pick exactly 11 player!', 'danger')
+        this.toast.presentToast('Pontosan 11 kiválasztott játékosnak kell lennie!', 'danger')
       }
 
   }
