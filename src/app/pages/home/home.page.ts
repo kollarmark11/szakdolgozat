@@ -1,8 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoadingController, NavController } from '@ionic/angular';
-import { Match } from 'src/app/shared/interfaces/match.model';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { ToastService } from 'src/app/shared/toast.service';
 import { FirestoreService } from '../../shared/firestore/firestore.service';
 
 @Component({
@@ -28,7 +28,9 @@ export class HomePage implements OnInit {
     private dataBase: FirestoreService,
     private loadingCtrl: LoadingController,
     private router: Router,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private alertCtrl: AlertController,
+    private toast: ToastService
   ) {}
 
   async ngOnInit() {
@@ -38,7 +40,7 @@ export class HomePage implements OnInit {
     this.getData();
   }
 
-  doRefresh(event){
+  doRefresh(event) {
     this.getEveryMatchData();
     this.getData();
     event.target.complete();
@@ -69,9 +71,29 @@ export class HomePage implements OnInit {
     this.everyMatch = this.dataBase.matches;
   }
 
-  deleteTeam(){
-    this.firestore.collection('teams').doc(this.actualId).delete();
-    this.router.navigateByUrl('/select-team')
+  async presentAlert() {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-alert-class',
+      header: 'Törlés',
+      message: 'Biztosan törli a csapatot?',
+      buttons: [
+        {
+          text: 'Mégse',
+          role: 'cancel',
+        },
+        {
+          text: 'Törlés',
+          role: 'Okay',
+          cssClass: 'delete-button',
+          handler: () => {
+            this.firestore.collection('teams').doc(this.actualId).delete();
+            this.toast.presentToast('Sikeres Törlés!', 'danger');
+            this.router.navigateByUrl('/select-team');
+          },
+        },
+      ],
+    });
+    await alert.present();
   }
 
   countOurGoals() {
@@ -114,7 +136,7 @@ export class HomePage implements OnInit {
     }
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('uid');
   }
 }

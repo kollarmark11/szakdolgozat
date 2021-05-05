@@ -1,0 +1,45 @@
+@import '../../../../theme/variables.scss';
+
+.match{
+  --background: #22333B;
+
+  &.edit{
+    --padding-start: 20px;
+    --padding-end: 20px;
+    ion-input, ion-textarea, ion-datetime, ion-select{
+      background-color: $light;
+      color: $dark;
+      border-radius: 5px;
+    }
+
+    ion-label{
+      color: $light;
+      margin-top:20px;
+    }
+
+    .button{
+      margin: 30px 5px;
+    }
+  }
+
+  &__goal{
+    font-size: 35px;
+    color: $dark;
+  }
+
+  &__opponent{
+    font-size: 25px;
+    font-weight: 600;
+    color: $background-color;
+  }
+
+  &__date{
+    font-size: 22px;
+    color: $primary;
+    font-weight: 500;
+  }
+
+  &__note{
+    display: block;
+  }
+}

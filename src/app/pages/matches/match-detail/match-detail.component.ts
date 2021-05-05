@@ -1,6 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
 import { FirestoreService } from 'src/app/shared/firestore/firestore.service';
 import { Match } from 'src/app/shared/interfaces/match.model';
@@ -26,7 +31,7 @@ export class MatchDetailComponent implements OnInit {
 
   matchData: Match;
   edit = false;
-  addMatchForm: FormGroup
+  addMatchForm: FormGroup;
   everyPlayer: any;
 
   constructor(
@@ -42,14 +47,11 @@ export class MatchDetailComponent implements OnInit {
   ngOnInit() {
     this.fireService.getCollectionEveryData(this.actualId, 'players');
     this.everyPlayer = this.fireService.players;
-    console.log(this.everyPlayer)
     this.getData();
-    console.log(this.matchData);
   }
 
-  async ionViewDidEnter(){
+  async ionViewDidEnter() {
     await this.getPositions();
-    console.log(this.rightBacksArray)
   }
 
   async getData() {
@@ -62,19 +64,20 @@ export class MatchDetailComponent implements OnInit {
       .then((doc) => {
         this.matchData = new Match();
         this.matchData.data = doc.data();
-        console.log(this.matchData.data);
       });
 
-      await this.createForm();
-
+    await this.createForm();
   }
 
-  createForm(){
+  createForm() {
     this.addMatchForm = this.fb.group({
       name: new FormControl(this.matchData.data.name, Validators.required),
-      opponent: new FormControl(this.matchData.data.opponent, Validators.required),
-      yourGoals: new FormControl(this.matchData.data.yourGoals, ),
-      opponentGoals: new FormControl(this.matchData.data.opponentGoals,),
+      opponent: new FormControl(
+        this.matchData.data.opponent,
+        Validators.required
+      ),
+      yourGoals: new FormControl(this.matchData.data.yourGoals),
+      opponentGoals: new FormControl(this.matchData.data.opponentGoals),
       date: new FormControl(this.matchData.data.date, Validators.required),
       note: new FormControl(this.matchData.data.note),
       goalkeeper: new FormControl(this.matchData.data.goalkeeper),
@@ -84,8 +87,8 @@ export class MatchDetailComponent implements OnInit {
       midfielders: new FormControl(this.matchData.data.midfielders),
       rightWingers: new FormControl(this.matchData.data.rightWingers),
       leftWingers: new FormControl(this.matchData.data.leftWingers),
-      strikers: new FormControl(this.matchData.data.strikers)
-    })
+      strikers: new FormControl(this.matchData.data.strikers),
+    });
   }
 
   onCancel() {
@@ -95,12 +98,10 @@ export class MatchDetailComponent implements OnInit {
   deleteMatch() {
     this.database.deleteSubDoc(this.actualId, 'matches', this.matchId);
     this.modalCtrl.dismiss('delete');
-
-    //KELL EGY POPUP vagymi, hogy sikeres elmentes
   }
 
-  editData(){
-    let number = (
+  editData() {
+    let number =
       this.addMatchForm.value.centreBacks.length +
       this.addMatchForm.value.leftBacks.length +
       this.addMatchForm.value.rightBacks.length +
@@ -108,81 +109,106 @@ export class MatchDetailComponent implements OnInit {
       this.addMatchForm.value.midfielders.length +
       this.addMatchForm.value.rightWingers.length +
       this.addMatchForm.value.leftWingers.length +
-      this.addMatchForm.value.strikers.length)
-      console.log(number)
+      this.addMatchForm.value.strikers.length;
 
-      if(number === 11 && this.addMatchForm.valid){
-        this.firestore.collection('teams').doc(this.actualId).collection('matches').doc(this.matchId).update(this.addMatchForm.value)
-        this.modalCtrl.dismiss('success')
-        this.toast.presentToast('Successfully match adding!', 'success')
-      }else if(this.addMatchForm.invalid){
-        this.toast.presentToast('Please fill every field!', 'danger')
-      }else if(number != 11) {
-        this.toast.presentToast('Please pick exactly 11 player!', 'danger')
-      }
+    if (number === 11 && this.addMatchForm.valid) {
+      this.firestore
+        .collection('teams')
+        .doc(this.actualId)
+        .collection('matches')
+        .doc(this.matchId)
+        .update(this.addMatchForm.value);
+      this.modalCtrl.dismiss('success');
+      this.toast.presentToast('Successfully match adding!', 'success');
+    } else if (this.addMatchForm.invalid) {
+      this.toast.presentToast('Please fill every field!', 'danger');
+    } else if (number != 11) {
+      this.toast.presentToast('Please pick exactly 11 player!', 'danger');
+    }
   }
 
-  onEdit(){
+  onEdit() {
     this.edit = !this.edit;
   }
 
-  getPositions(){
-
-
-
-    for(let i = 0; i<this.everyPlayer.length; i++){
-      if(this.everyPlayer[i].data.mainPosition === 'gk')
-      this.goalkeepersArray.push(this.everyPlayer[i])
+  getPositions() {
+    for (let i = 0; i < this.everyPlayer.length; i++) {
+      if (this.everyPlayer[i].data.mainPosition === 'gk')
+        this.goalkeepersArray.push(this.everyPlayer[i]);
     }
 
-    for(let i = 0; i<this.everyPlayer.length; i++){
-      if(this.everyPlayer[i].data.mainPosition === 'rb' || this.everyPlayer[i].data.mainPosition === 'rwb')
-      this.rightBacksArray.push(this.everyPlayer[i])
+    for (let i = 0; i < this.everyPlayer.length; i++) {
+      if (
+        this.everyPlayer[i].data.mainPosition === 'rb' ||
+        this.everyPlayer[i].data.mainPosition === 'rwb'
+      )
+        this.rightBacksArray.push(this.everyPlayer[i]);
     }
 
-    for(let i = 0; i<this.everyPlayer.length; i++){
-      if(this.everyPlayer[i].data.mainPosition === 'lb' || this.everyPlayer[i].data.mainPosition === 'lwb')
-      this.leftBacksArray.push(this.everyPlayer[i])
+    for (let i = 0; i < this.everyPlayer.length; i++) {
+      if (
+        this.everyPlayer[i].data.mainPosition === 'lb' ||
+        this.everyPlayer[i].data.mainPosition === 'lwb'
+      )
+        this.leftBacksArray.push(this.everyPlayer[i]);
     }
 
-    for(let i = 0; i<this.everyPlayer.length; i++){
-      if(this.everyPlayer[i].data.mainPosition === 'cb')
-      this.centreBacksArray.push(this.everyPlayer[i])
+    for (let i = 0; i < this.everyPlayer.length; i++) {
+      if (this.everyPlayer[i].data.mainPosition === 'cb')
+        this.centreBacksArray.push(this.everyPlayer[i]);
     }
 
-    for(let i = 0; i<this.everyPlayer.length; i++){
-      if(this.everyPlayer[i].data.mainPosition === 'cm' || this.everyPlayer[i].data.mainPosition === 'cam' || this.everyPlayer[i].data.mainPosition === 'cdm')
-      this.midfieldersArray.push(this.everyPlayer[i])
+    for (let i = 0; i < this.everyPlayer.length; i++) {
+      if (
+        this.everyPlayer[i].data.mainPosition === 'cm' ||
+        this.everyPlayer[i].data.mainPosition === 'cam' ||
+        this.everyPlayer[i].data.mainPosition === 'cdm'
+      )
+        this.midfieldersArray.push(this.everyPlayer[i]);
     }
 
-    for(let i = 0; i<this.everyPlayer.length; i++){
-      if(this.everyPlayer[i].data.mainPosition === 'lm' || this.everyPlayer[i].data.mainPosition === 'lw')
-      this.leftWingersArray.push(this.everyPlayer[i])
+    for (let i = 0; i < this.everyPlayer.length; i++) {
+      if (
+        this.everyPlayer[i].data.mainPosition === 'lm' ||
+        this.everyPlayer[i].data.mainPosition === 'lw'
+      )
+        this.leftWingersArray.push(this.everyPlayer[i]);
     }
 
-    for(let i = 0; i<this.everyPlayer.length; i++){
-      if(this.everyPlayer[i].data.mainPosition === 'rm' || this.everyPlayer[i].data.mainPosition === 'rw')
-      this.rightWingersArray.push(this.everyPlayer[i])
+    for (let i = 0; i < this.everyPlayer.length; i++) {
+      if (
+        this.everyPlayer[i].data.mainPosition === 'rm' ||
+        this.everyPlayer[i].data.mainPosition === 'rw'
+      )
+        this.rightWingersArray.push(this.everyPlayer[i]);
     }
 
-    for(let i = 0; i<this.everyPlayer.length; i++){
-      if(this.everyPlayer[i].data.mainPosition === 'st' || this.everyPlayer[i].data.mainPosition === 'cf')
-      this.strikersArray.push(this.everyPlayer[i])
+    for (let i = 0; i < this.everyPlayer.length; i++) {
+      if (
+        this.everyPlayer[i].data.mainPosition === 'st' ||
+        this.everyPlayer[i].data.mainPosition === 'cf'
+      )
+        this.strikersArray.push(this.everyPlayer[i]);
     }
   }
 
   async presentAlert() {
     const alert = await this.alertCtrl.create({
-      cssClass: 'my-custom-class',
-      header: 'Alert',
-      subHeader: 'Subtitle',
-      message: 'This is an alert message.',
+      cssClass: 'my-alert-class',
+      header: 'Törlés',
+      message: 'Biztosan törli a mérkőzést?',
       buttons: [
         {
-          text: 'Delete',
-          cssClass: 'danger',
+          text: 'Mégse',
+          role: 'cancel',
+        },
+        {
+          text: 'Törlés',
+          role: 'Okay',
+          cssClass: 'delete-button',
           handler: () => {
             this.deleteMatch();
+            this.toast.presentToast('Sikeres Törlés!', 'danger');
           },
         },
       ],

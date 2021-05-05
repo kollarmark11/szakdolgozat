@@ -7,9 +7,9 @@ export class InjuredPipe implements PipeTransform {
 
   transform(value: any): unknown {
     if(value === true){
-      return 'Injured'
+      return 'Sérült'
     }else if(value === false){
-      return 'Not injured'
+      return 'Nem sérült'
     }
   }
 

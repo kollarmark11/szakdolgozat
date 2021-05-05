@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController, ModalController } from '@ionic/angular';
+import {  ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FirestoreService } from 'src/app/shared/firestore/firestore.service';
 import { Team } from 'src/app/shared/interfaces/team.model';
@@ -26,15 +26,12 @@ export class SelectTeamPage implements OnInit {
 
   ngOnInit() {
     this.teams = this.firestore.teams;
-    this.loader.showLoader('Loading');
+    this.loader.showLoader('Töltés..');
     this.firestore.getEveryData()
     .then(() => {
-      console.log(this.firestore.teams)
       this.teams = this.firestore.teams;
       this.loader.hideLoader();
     });
-
-
   }
 
   ionViewDidEnter(){
@@ -46,7 +43,7 @@ export class SelectTeamPage implements OnInit {
   doRefresh(){
     this.teams = [];
     this.firestore.teams = [];
-    this.loader.showLoader('Refresh');
+    this.loader.showLoader('Frissítés..');
     this.getEveryTeamData().then(() => {
       this.teams = this.firestore.teams
       this.loader.hideLoader();
@@ -60,10 +57,9 @@ export class SelectTeamPage implements OnInit {
       cssClass: 'team-modal',
     });
     this.addTeamModal
-      .onDidDismiss() // HA bezárul a modal, az adatot megkapjuk és hozzáadjuk a teams tömbhöz
+      .onDidDismiss()
       .then((data) => {
         if (data.data != null) {
-          // kihozott adatot vizsgáljuk, ha null az érték, akkor marad minden
           this.getEveryTeamData()
           this.teams = this.firestore.teams;
         }
@@ -72,7 +68,6 @@ export class SelectTeamPage implements OnInit {
   }
 
   async getEveryTeamData() {
-    // MINDEN adatot kikérünk, hogy felsoroljuk a csapatokat
     await this.firestore.getEveryData();
   }
 

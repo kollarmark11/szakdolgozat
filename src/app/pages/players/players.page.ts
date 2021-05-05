@@ -12,66 +12,66 @@ import { PlayerDetailComponent } from './player-detail/player-detail.component';
   styleUrls: ['./players.page.scss'],
 })
 export class PlayersPage implements OnInit {
-
   actualId: string;
   addPlayerModal: any;
   everyPlayer: any;
 
-  constructor(private route: ActivatedRoute, private modalCtrl: ModalController, private firestore: FirestoreService, private loader: LoaderService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private modalCtrl: ModalController,
+    private firestore: FirestoreService,
+    private loader: LoaderService
+  ) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       this.actualId = params.id;
-    })
+    });
 
     this.firestore.getCollectionEveryData(this.actualId, 'players');
     this.everyPlayer = this.firestore.players;
-    console.log(this.everyPlayer)
   }
 
-  async presentAddModal(){
+  async presentAddModal() {
     this.addPlayerModal = await this.modalCtrl.create({
       component: AddPlayerComponent,
       cssClass: 'add-modal',
       componentProps: {
-        id: this.actualId
-      }
+        id: this.actualId,
+      },
     });
-    this.addPlayerModal.onDidDismiss()  // HA bezárul a modal, az adatot megkapjuk és hozzáadjuk a teams tömbhöz
+    this.addPlayerModal
+      .onDidDismiss() // HA bezárul a modal, az adatot megkapjuk és hozzáadjuk a teams tömbhöz
       .then((data) => {
-        if(data.data != null) {
+        if (data.data != null) {
           this.firestore.getCollectionEveryData(this.actualId, 'players');
           this.everyPlayer = this.firestore.players;
         } else {
         }
-      })
+      });
     return await this.addPlayerModal.present();
   }
 
-
-  async presentDetailModal(id){
-    console.log(id)
-    console.log('actualid: ' + this.actualId)
+  async presentDetailModal(id) {
     const modal = await this.modalCtrl.create({
       component: PlayerDetailComponent,
       cssClass: 'player-detail-modal',
       componentProps: {
         playerId: id,
         actualId: this.actualId,
+      },
+    });
+    modal.onDidDismiss().then((data) => {
+      if (data.data === 'delete' || data.data === 'success') {
+        this.firestore.getCollectionEveryData(this.actualId, 'players');
+        this.everyPlayer = this.firestore.players;
       }
     });
-    modal.onDidDismiss()
-      .then((data) => {
-        if(data.data === 'delete' || data.data === 'success'){
-          this.firestore.getCollectionEveryData(this.actualId, 'players');
-          this.everyPlayer = this.firestore.players;
-        }
-      })
     return await modal.present();
   }
 
-  async deletePlayer(playerId){
-    await this.firestore.deleteSubDoc(this.actualId, 'players', playerId)
+  async deletePlayer(playerId) {
+    await this.firestore.deleteSubDoc(this.actualId, 'players', playerId);
     this.everyPlayer = [];
     this.firestore.players = [];
     this.firestore.getCollectionEveryData(this.actualId, 'players');
@@ -79,6 +79,4 @@ export class PlayersPage implements OnInit {
 
     //KELL EGY POPUP vagymi, hogy sikeres elmentes
   }
-
-
 }

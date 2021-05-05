@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'select-team',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {

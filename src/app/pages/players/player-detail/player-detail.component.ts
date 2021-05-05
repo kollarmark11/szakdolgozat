@@ -5,6 +5,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AlertController, ModalController } from '@ionic/angular';
 import { FirestoreService } from 'src/app/shared/firestore/firestore.service';
 import { Player } from 'src/app/shared/interfaces/player.model';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-player-detail',
@@ -30,7 +31,8 @@ export class PlayerDetailComponent implements OnInit {
     private store: FirestoreService,
     private alertCtrl: AlertController,
     private fb: FormBuilder,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private toast: ToastService
   ) {}
 
   ngOnInit() {
@@ -86,9 +88,7 @@ export class PlayerDetailComponent implements OnInit {
 
   async uploadImg(event){
     const file = event.target.files;
-    console.log(file)
     this.filename = file[0]
-    console.log(this.filename)
 
     if(this.filename.type.split('/')[0] !== "image"){
       console.error("ERROR")
@@ -102,14 +102,12 @@ export class PlayerDetailComponent implements OnInit {
   }
 
   async updateData(){
-    console.log(this.path + ' ' + this.filename)
 
     if(this.isUploadImage){
       this.imageUpload = this.storage.upload(this.path, this.filename);
       await this.imageUpload.then(res => {
         let imgFile  = res.task.snapshot.ref.getDownloadURL();
         imgFile.then(downloadUrl => {
-          console.log(downloadUrl)
           this.addPlayerForm.value.profilePicture = downloadUrl;
           this.firestore.collection('teams').doc(this.actualId).collection('players').doc(this.playerId).update(this.addPlayerForm.value)
         })
@@ -122,17 +120,23 @@ export class PlayerDetailComponent implements OnInit {
 
   async presentAlert() {
     const alert = await this.alertCtrl.create({
-      cssClass: 'my-custom-class',
-      header: 'Alert',
-      subHeader: 'Subtitle',
-      message: 'This is an alert message.',
+      cssClass: 'my-alert-class',
+      header: 'Játékos törlése',
+      message: 'Biztosan törlöd a játékost?',
       buttons: [
         {
-          text: 'Delete',
-          cssClass: 'danger',
+          text: 'Mégse',
+          role: 'cancel'
+        },
+        {
+          text: 'Törlés',
+          role: 'Okay',
+          cssClass: 'delete-button',
           handler: () => {
             this.deletePlayer();
-          }
+            this.toast.presentToast('Sikeres Törlés!', 'danger')
+          },
+
         }
       ],
     });

@@ -79,18 +79,28 @@ ion-input, ion-textarea, ion-datetime{
   background-color: $tertiary;
 }
 
-.alert-wrapper{
-  min-width: 90% !important;
+.my-alert-class .alert-wrapper{
+  --background: white;
+
+  .delete-button{
+    color: $danger;
+    font-weight: 700;
+  }
 }
 
 .basic-loader{
-  --background: #5B9279;
-  color: white;
-  --spinner-color: white;
+  color: #22333B;
+  --spinner-color: #22333B;
 }
 
 @media screen and (min-width: 776px) {
   .my-custom-class .modal-wrapper{
     width: 50%;
+  }
+}
+
+@media screen and (max-width: 776px) {
+  .my-alert-class .alert-wrapper{
+    min-width: 90% !important;
   }
 }

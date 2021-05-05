@@ -29,9 +29,6 @@ export class AddMatchComponent implements OnInit {
   constructor(private modalCtrl: ModalController, private firestore: FirestoreService, private fb: FormBuilder, private toast: ToastService) { }
 
   ngOnInit() {
-    console.log('ID: ' + this.id)
-
-
 
     this.defense = Array(6);
     this.firestore.getCollectionEveryData(this.id, 'players');
@@ -65,10 +62,6 @@ export class AddMatchComponent implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  valami(event){
-    console.log(event)
-  }
-
   addMatch(){
 
      let number = (
@@ -80,7 +73,6 @@ export class AddMatchComponent implements OnInit {
       this.addMatchForm.value.rightWingers.length +
       this.addMatchForm.value.leftWingers.length +
       this.addMatchForm.value.strikers.length)
-      console.log(number)
 
       if((number === 11 || number === 0) && this.addMatchForm.valid){
         this.firestore.pushDocData(this.id, 'matches', this.addMatchForm.value)

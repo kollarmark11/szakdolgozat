@@ -49,9 +49,7 @@ export class AddPlayerComponent implements OnInit {
 
   async uploadImg(event){
     const file = event.target.files;
-    console.log(file)
     var fileName = file[0]
-    console.log(fileName)
 
     if(fileName.type.split('/')[0] !== "image"){
       console.error("ERROR")
@@ -67,7 +65,6 @@ export class AddPlayerComponent implements OnInit {
     this.imageUpload.then(res => {
       let imgFile  = res.task.snapshot.ref.getDownloadURL();
       imgFile.then(downloadUrl => {
-        console.log(downloadUrl)
         this.pictureUrl = downloadUrl;
       })
     })
@@ -75,7 +72,6 @@ export class AddPlayerComponent implements OnInit {
 
   addPlayer() {
     this.addPlayerForm.value.profilePicture = this.pictureUrl;
-    console.log(this.addPlayerForm.value);
     this.firestore.pushDocData(this.id, 'players', this.addPlayerForm.value);
     this.modalCtrl.dismiss('success');
   }

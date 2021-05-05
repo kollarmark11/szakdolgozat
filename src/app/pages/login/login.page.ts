@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
@@ -25,7 +22,7 @@ export class LoginPage implements OnInit {
   }
 
   ionViewWillEnter(){
-    this.loginForm.reset()  // reseteljük a form-ot ha újra betölt az oldal
+    this.loginForm.reset()
   }
 
   async onLogin(){

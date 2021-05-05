@@ -8,35 +8,35 @@ export class PositionPipe implements PipeTransform {
   transform(value: string): unknown {
     switch(value){
       case 'gk':
-        return 'Goalkeeper'
+        return 'Kapus'
       case 'rb':
-        return 'Right Back'
+        return 'Jobb védő'
       case 'cb':
-        return 'Centre Back'
+        return 'Középső védő'
       case 'lb':
-        return 'Left Back'
+        return 'Bal védő'
       case 'rwb':
-        return 'Right Wing Back'
+        return 'Jobb szélső védő'
       case 'lwb':
-        return 'Left Wing Back'
+        return 'Bal szélső védő'
       case 'cdm':
-        return 'Centre Defensive Midfielder'
+        return 'Védekező középső középpályás'
       case 'cm':
-        return 'Centre Midfielder'
+        return 'Középső középpályás'
       case 'cam':
-        return 'Centre Attacking Midfielder'
+        return 'Támadó középpályás'
       case 'rm':
-        return 'Right Midfielder'
+        return 'Jobb középpályás'
       case 'lm':
-        return 'Left Midfielder'
+        return 'Bal középpályás'
       case 'rw':
-        return 'Right Wing'
+        return 'Jobb szélső'
       case 'lw':
-        return 'Left Wing'
+        return 'Bal szélső'
       case 'cf':
-        return 'Centre Forward'
+        return 'Középső csatár'
       case 'st':
-        return 'Striker'
+        return 'Csatár'
 
     }
   }

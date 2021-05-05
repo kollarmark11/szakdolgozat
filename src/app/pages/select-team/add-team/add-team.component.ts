@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -20,14 +19,11 @@ export class AddTeamComponent implements OnInit {
 
   async ngOnInit() {
     await this.auth.currentUid();
-    console.log(this.auth.uid)
 
     this.addTeamForm = this.fb.group({
       name: new FormControl('', Validators.required),
       uid: ''
     })
-
-    console.log(this.addTeamForm)
 
   }
 
@@ -44,8 +40,8 @@ export class AddTeamComponent implements OnInit {
     if(this.addTeamForm.invalid) {
 
     } else {
-      this.firestore.pushNewData(this.addTeamForm.value); // firestore hozzáadás
-      this.modalCtrl.dismiss(this.addTeamForm.value) // ezt az adatot visszük ki a modal-ból
+      this.firestore.pushNewData(this.addTeamForm.value);
+      this.modalCtrl.dismiss(this.addTeamForm.value);
     }
   }
 }
