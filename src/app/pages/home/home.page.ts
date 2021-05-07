@@ -139,4 +139,9 @@ export class HomePage implements OnInit {
   logout() {
     localStorage.removeItem('uid');
   }
+
+  onRefresh(){
+    this.getEveryMatchData();
+    this.getData();
+  }
 }

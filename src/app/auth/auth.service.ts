@@ -22,7 +22,7 @@ export class AuthService {
         this.router.navigateByUrl('select-team')
       })
       .catch((error) => {
-        this.toast.presentToast(error.message, 'danger');
+        this.toast.presentToast('Helytelen email vagy jelszó!', 'danger');
       })
       await this.currentUid();
 
