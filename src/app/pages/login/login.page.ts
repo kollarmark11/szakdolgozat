@@ -10,8 +10,6 @@ import { ForgottenPasswordComponent } from './forgotten-password/forgotten-passw
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
-
   loginForm: FormGroup;
   errorMessage: string;
 
