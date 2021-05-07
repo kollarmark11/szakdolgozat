@@ -21,7 +21,7 @@
 
           <ion-label position="stacked" color="light" class="ion-padding-bottom">Jelszó</ion-label>
           <ion-input type="password" color="dark" formControlName="password"></ion-input>
-          <ion-text color="danger" *ngIf="loginForm.get('password').touched && loginForm.get('email').hasError('password')">Kötelező mező!</ion-text>
+          <ion-text color="danger" *ngIf="loginForm.get('password').touched && loginForm.get('password').hasError('required')">Kötelező mező!</ion-text>
 
       </ion-col>
     </ion-row>
