@@ -34,6 +34,7 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+
 .error-message{
   font-size: 14px;
 }
@@ -79,6 +80,12 @@ ion-input, ion-textarea, ion-datetime{
   background-color: $tertiary;
 }
 
+.forgotten-password .modal-wrapper{
+  --border-radius: 15px;
+  width: 90%;
+  height: 50%;
+}
+
 .my-alert-class .alert-wrapper{
   --background: white;
 
@@ -96,6 +103,11 @@ ion-input, ion-textarea, ion-datetime{
 @media screen and (min-width: 776px) {
   .my-custom-class .modal-wrapper{
     width: 50%;
+  }
+
+  .forgotten-password .modal-wrapper{
+    width: 50%;
+    height: 50%;
   }
 }
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
+import { ForgottenPasswordComponent } from './forgotten-password/forgotten-password.component';
 
 @Component({
   selector: 'app-login',
@@ -9,10 +11,11 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class LoginPage implements OnInit {
 
+
   loginForm: FormGroup;
   errorMessage: string;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -30,6 +33,14 @@ export class LoginPage implements OnInit {
       await this.authService.standardLogin(this.loginForm.value.email, this.loginForm.value.password);
     }
     this.errorMessage = this.authService.errorMessage;
+  }
+
+  async presentForgottenPasswordModal(){
+    const modal = await this.modalCtrl.create({
+      component: ForgottenPasswordComponent,
+      cssClass: 'forgotten-password'
+    });
+    return await modal.present();
   }
 
 }

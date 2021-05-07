@@ -52,4 +52,16 @@
   margin-top: 30px;
 }
 
+.forgotten-password{
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .login__title{
+    font-size: 24px;
+  }
+}
+
 

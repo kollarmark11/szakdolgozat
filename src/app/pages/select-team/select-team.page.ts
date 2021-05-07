@@ -13,7 +13,7 @@ import { AddTeamComponent } from './add-team/add-team.component';
   styleUrls: ['./select-team.page.scss'],
 })
 export class SelectTeamPage implements OnInit {
-  teams: Team[];
+  teams: Team[] = [];
   addTeamModal: any;
 
   constructor(
@@ -25,18 +25,24 @@ export class SelectTeamPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.teams = this.firestore.teams;
-    this.loader.showLoader('Töltés..');
-    this.firestore.getEveryData()
-    .then(() => {
-      this.teams = this.firestore.teams;
-      this.loader.hideLoader();
-    });
+
   }
 
   ionViewDidEnter(){
     if(!localStorage.getItem('uid')){
       this.router.navigateByUrl('/login')
+    } else {
+      this.teams = [];
+      this.teams = this.firestore.teams;
+      this.loader.showLoader('Töltés..');
+      this.firestore.getEveryData()
+    .then(() => {
+      this.teams = this.firestore.teams;
+      this.loader.hideLoader();
+    })
+    .catch(() => {
+      this.loader.hideLoader();
+    });
     }
   }
 
@@ -51,7 +57,6 @@ export class SelectTeamPage implements OnInit {
   }
 
   async presentAddTeamModal() {
-    // MODAL PRESENT
     this.addTeamModal = await this.modalCtrl.create({
       component: AddTeamComponent,
       cssClass: 'team-modal',

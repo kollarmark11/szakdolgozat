@@ -32,3 +32,24 @@ ion-content{
 .team_button{
   --border-radius: 50px;
 }
+
+
+@media screen and (max-width: 1300px) {
+  .title{
+    font-size: 27px;
+
+  }
+  .subtitle_title{
+    font-size: 27px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .title{
+    font-size: 22px;
+
+  }
+  .subtitle_title{
+    font-size: 22px;
+  }
+}

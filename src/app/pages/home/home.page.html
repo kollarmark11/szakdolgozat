@@ -15,13 +15,13 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col class="ion-text-center ion-padding-vertical ion-margin-vertical" size="12" size-md="4" offset-md="4">
+      <ion-col class="ion-text-center ion-padding-vertical ion-margin-vertical" size="12" size-lg="4" offset-lg="4">
         <ion-text class="home__title">{{ actualTeam.name }}</ion-text>
       </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-col class="ion-text-center" size="12" size-md="6" offset-md="3">
+      <ion-col class="ion-text-center" size="12" size-lg="6" offset-lg="3">
         <circle-progress
           [percent]=" wins/(wins + lose + draw) * 100"
           [radius]="100"
@@ -42,19 +42,19 @@
     </ion-row>
 
     <ion-row>
-      <ion-col class="ion-text-center" size-md="2" offset-md="3">
+      <ion-col class="ion-text-center" size-lg="2" offset-lg="3">
         <div class="home__result__div wins">
           <p>Győzelmek</p>
           <p>{{ wins }}</p>
         </div>
       </ion-col>
-      <ion-col class="ion-text-center" size-md="2">
+      <ion-col class="ion-text-center" size-lg="2">
         <div class="home__result__div draws">
           <p>Döntetlenek</p>
           <p>{{ draw }}</p>
         </div>
       </ion-col>
-      <ion-col class="ion-text-center" size-md="2">
+      <ion-col class="ion-text-center" size-lg="2">
         <div class="home__result__div loses">
           <p>Vereségek</p>
           <p>{{ lose }}</p>
@@ -63,7 +63,7 @@
     </ion-row>
 
     <ion-row>
-      <ion-col class="ion-no-padding ion-no-margin" size="12" size-md="6" offset-md="3">
+      <ion-col class="ion-no-padding ion-no-margin" size="12" size-lg="6" offset-lg="3">
         <div class="home__card">
           <p>Rúgott gólok:</p>
           <p>{{ ourGoals }}</p>
@@ -72,7 +72,7 @@
     </ion-row>
 
     <ion-row>
-      <ion-col class="ion-no-padding ion-no-margin" size="12" size-md="6" offset-md="3">
+      <ion-col class="ion-no-padding ion-no-margin" size="12" size-lg="6" offset-lg="3">
         <div class="home__card">
           <p>Kapott gólok:</p>
           <p>{{ opponentGoals }}</p>

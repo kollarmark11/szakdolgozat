@@ -67,4 +67,8 @@ export class AuthService {
       localStorage.setItem('uid', (user.uid))
     })
   }
+
+  resetPassword(event){
+    this.auth.sendPasswordResetEmail(event);
+  }
 }

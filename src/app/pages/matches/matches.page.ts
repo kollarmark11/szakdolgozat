@@ -27,7 +27,7 @@ export class MatchesPage implements OnInit {
     this.route.queryParams.subscribe((params) => {
       this.actualId = params.id;
     });
-    this.firestore.getCollectionEveryData(this.actualId, 'players');
+    this.firestore.getCollectionEveryData(this.actualId, 'matches');
     this.everyMatch = this.firestore.matches;
   }
 
@@ -70,7 +70,8 @@ export class MatchesPage implements OnInit {
       },
     });
     modal.onDidDismiss().then((data) => {
-      if (data.data === 'delete') {
+      if (data.data === 'delete' || data.data === 'success') {
+        this.everyMatch = [];
         this.firestore.getEveryMatch(this.actualId);
         this.everyMatch = this.firestore.matches;
       }

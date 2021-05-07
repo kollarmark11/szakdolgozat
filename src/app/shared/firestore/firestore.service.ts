@@ -19,6 +19,7 @@ export class FirestoreService {
 
   async getEveryData() {
     this.auth.uid = '';
+    this.teams = [];
     await this.auth.currentUid();
     await this.firestore
       .collection('teams')

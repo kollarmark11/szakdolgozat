@@ -109,9 +109,9 @@ export class MatchDetailComponent implements OnInit {
       this.addMatchForm.value.midfielders.length +
       this.addMatchForm.value.rightWingers.length +
       this.addMatchForm.value.leftWingers.length +
-      this.addMatchForm.value.strikers.length;
+      this.addMatchForm.value.strikers.length+ 1;
 
-    if (number === 11 && this.addMatchForm.valid) {
+    if ((number === 12 || number === 1) && this.addMatchForm.valid) {
       this.firestore
         .collection('teams')
         .doc(this.actualId)

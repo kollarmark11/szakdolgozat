@@ -76,7 +76,7 @@ export class AddMatchComponent implements OnInit {
       1)
       console.log(number)
 
-      if((number === 12 || number === 0) && this.addMatchForm.valid){
+      if((number === 12 || number === 1) && this.addMatchForm.valid){
         this.firestore.pushDocData(this.id, 'matches', this.addMatchForm.value)
         this.modalCtrl.dismiss('success')
         this.toast.presentToast('Sikeres mérkőzés hozzáadás!', 'success')
