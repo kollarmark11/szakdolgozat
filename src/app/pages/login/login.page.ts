@@ -11,7 +11,6 @@ import { ForgottenPasswordComponent } from './forgotten-password/forgotten-passw
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
-  errorMessage: string;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private modalCtrl: ModalController) { }
 
@@ -30,7 +29,7 @@ export class LoginPage implements OnInit {
     if(this.loginForm.valid){
       await this.authService.standardLogin(this.loginForm.value.email, this.loginForm.value.password);
     }
-    this.errorMessage = this.authService.errorMessage;
+
   }
 
   async presentForgottenPasswordModal(){

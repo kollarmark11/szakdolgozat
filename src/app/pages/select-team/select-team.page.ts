@@ -29,12 +29,13 @@ export class SelectTeamPage implements OnInit {
   }
 
   ionViewDidEnter(){
+    this.loader.showLoader('Töltés..');
     if(!localStorage.getItem('uid')){
       this.router.navigateByUrl('/login')
     } else {
       this.teams = [];
       this.teams = this.firestore.teams;
-      this.loader.showLoader('Töltés..');
+
       this.firestore.getEveryData()
     .then(() => {
       this.teams = this.firestore.teams;
